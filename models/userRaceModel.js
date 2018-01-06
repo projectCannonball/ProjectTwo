@@ -8,11 +8,17 @@ var user_race = {
             cb(res);
         });
     },
+    //selectOne()
+    selectOne: function(cb) {
+        orm.selectOne("USER_RACE", "status", condition, function(res){
+            cb(res);
+        });
+    },
     // The variables cols and vals are arrays.
     //insertOne()
     insert: function(cols, vals, cb) {
         orm.insertOne("USER_RACE", cols, vals, function(res) {
-            cb(res);
+            cb(res.insertId);
         });
     },
     //updateOne()
