@@ -1,8 +1,8 @@
 // Set up MySQL connection.
 var mysql = require("mysql");
 
-if (process.env.JAWSDB_URL) {
-  connection = mysql.createPool(process.env.JAWSDB_URL);
+if (process.env.CLEARDB_DATABASE_URL) {
+  connection = mysql.createPool(process.env.CLEARDB_DATABASE_URL);
 } else {
   var connection = mysql.createPool({
     port: 3306,
