@@ -3,8 +3,8 @@ var orm = require("../config/orm.js");
 
 var user = {
     //selectAll() 
-    all: function(cb) {
-        orm.selectAll("USERS", function(res) {
+    one: function(condition, cb) {
+        orm.selectOne("USERS", "id", condition, function(res) {
             cb(res);
         });
     },

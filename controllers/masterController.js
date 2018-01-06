@@ -11,13 +11,10 @@ var user_race = require("../models/userRaceHistoryModel.js");
 var userRace_history = require("../models/userRaceModel.js");
 
 //main index route that grabs all the info
-router.get("/", function(req, res) {
-    user.all(function(data) {
-    var hbsObject = {
-      users: data
-    };
-    res.render("index", hbsObject);
-  });
+router.get("/:id?", function(req, res) {
+    user.one(req.params.id, function(data){
+        res.render("userPage", {user: data});
+    });
 });
 
 //main post route that creates the new user
@@ -27,9 +24,9 @@ router.post("/", function(req, res) {
     "height", "weight", "race", "age", "sex",
     "city", "state"
   ], [
-    req.body.name, false, new Date()
-  ], function() {
-    res.redirect("/");
+    req.body
+  ], function(id) {
+    res.redirect("/"+id);
   });
 });
 

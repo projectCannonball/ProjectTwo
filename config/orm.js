@@ -13,6 +13,17 @@ var orm = {
             });
         });
     },
+    selectOne:function(table, conCol, condition, func){
+        pool.getConnection().then(function(connection){
+            connection.query("SELECT * FROM ?? WHERE ?? = ?", [table, conCol, condition], function(error, data){
+                if(error) throw error;
+
+                func(data);
+
+                pool.closeConnection(connection);
+            });
+        });
+    },
     insertOne: function(table, cols, values, func){
         pool.getConnection().then(function(connection){
             connection.query("INSERT INTO ?? (??) VALUES (?)", [table, cols, values], function(error, data){
