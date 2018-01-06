@@ -13,7 +13,7 @@ var userRace_history = require("../models/userRaceModel.js");
 //main index route that grabs all the info
 router.get("/:id?", function(req, res) {
     user.one(req.params.id, function(data){
-        res.render("userPage", {user: data});
+        res.render("index", {user: data});
     });
 });
 
