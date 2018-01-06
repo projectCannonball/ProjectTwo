@@ -2,9 +2,9 @@
 var mysql = require("mysql");
 
 if (process.env.CLEARDB_DATABASE_URL) {
-  connection = mysql.createPool(process.env.CLEARDB_DATABASE_URL);
+  pool = mysql.createPool(process.env.CLEARDB_DATABASE_URL);
 } else {
-  var connection = mysql.createPool({
+  var pool = mysql.createPool({
     port: 3306,
     host: "localhost",
     user: "cb_user",
