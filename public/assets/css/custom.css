@@ -1,0 +1,104 @@
+h1 .navbar-brand {
+    color: orange;
+    font-family: 'Bangers', cursive;
+    font-size: 1em;
+    margin: 15px;
+}
+
+.navbar {
+    margin-bottom: 0px;
+}
+
+.navbar-header h1{
+    font-size: 4em;
+    font-weight: bold;
+    margin: 0 0 0 20px;
+}
+
+#masthead {
+    margin-bottom: 0px;
+    background-image: url('../images/running.jpg');
+    background-position: 0% 25%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    margin-bottom: 15px;
+}
+
+#masthead h2 {
+    color: orange;
+    font-size: 4em;
+    font-weight: bold;
+    text-align: right;
+    text-shadow: 2px 2px 2px #404040;
+}
+
+#masthead p {
+    color: whitesmoke;
+    font-size: 2em;
+    line-height: 1.15em;
+    text-align: right;
+    text-shadow: 3px 3px 3px black;
+}
+
+#masthead button {
+    /* border-radius: 10px; */
+    font-size: 1.75em;
+    margin-right: 30px;
+    width: 25%;
+}
+
+#login {
+    float: right;
+    font-size: 1.5em;
+    margin-top: 25px;
+    width: 30%;
+}
+#login .panel-title {
+    font-size: 1.25em;
+}
+
+#login input {
+    margin-bottom: 10px;
+    width: 100%;
+}
+
+#login input[type='submit'] {
+    font-weight: bold;
+}
+
+#login span {
+    font-size: .80em;
+}
+
+.marketing h3 {
+    color: #546469;
+    font-size: 3em;
+    font-weight: 700;
+    text-align: center;
+}
+
+.featurette-divider {
+    margin-top: 0;
+}
+
+.featurette-divider img {
+    height: 100%;
+    width: 100%;
+}
+
+.jumbotron {
+    background-image: url("../images/race_path_gradient.jpg");
+    /* background-position: 0% 25%; */
+    background-size: cover;
+    background-repeat: no-repeat;
+    color: #ffffff;
+    height: auto;
+}
+
+#racePath {
+    height: 700px;
+}
+
+.featurette-heading {
+    margin-top: 40px;
+}
