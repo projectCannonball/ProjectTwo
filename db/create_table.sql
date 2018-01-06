@@ -34,7 +34,7 @@ CREATE TABLE Races (
 CREATE TABLE user_race (
 	user_id INT NOT NULL,
     race_id INT NOT NULL,
-    status BOOLEAN NOT NULL,
+    status VARCHAR(15) NOT NULL,
     finishPlace INT NOT NULL,
     entryDate DATE NOT NULL,
     create_ts TIMESTAMP NOT NULL DEFAULT current_timestamp,
