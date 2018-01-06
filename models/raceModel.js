@@ -3,19 +3,19 @@ var orm = require("../config/orm.js");
 var race = {
 	// Select All Data
 	selectAll: (cb) => {
-		orm.selectAll("burgers",(res) => {
+		orm.selectAll("USERS",(res) => {
 			cb(res);
 		});
 	},
 	// Create a Single Entry
 	insertOne: (cols, vals, cb) => {
-		orm.insertOne("burgers", cols, vals, (res) => {
+		orm.insertOne("USERS", cols, vals, (res) => {
 			cb(res);
 		});
 	},
 	// Update a Single Entry
 	updateOne: (objColVals, condition, cb) => {
-		orm.updateOne("burgers", objColVals, condition, (res) => {
+		orm.updateOne("USERS", objColVals, condition, (res) => {
 			cb(res);
 		});
 	}
