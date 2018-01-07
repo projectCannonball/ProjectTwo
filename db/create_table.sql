@@ -11,6 +11,7 @@ CREATE TABLE Users (
 	sex VARCHAR(255),
 	city VARCHAR(255),
 	state VARCHAR(255),
+    email VARCHAR(255),
 	create_ts TIMESTAMP NOT NULL DEFAULT current_timestamp,
 	update_ts TIMESTAMP NOT NULL DEFAULT current_timestamp ON UPDATE current_timestamp
 );

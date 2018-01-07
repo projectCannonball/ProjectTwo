@@ -26,10 +26,10 @@ var orm = {
     },
     insertOne: function(table, cols, values, func){
         pool.getConnection().then(function(connection){
-            connection.query("INSERT INTO ?? (??) VALUES (?)", [table, cols, values], function(error, data){
-                if(error) throw error;
+            var query = connection.query("INSERT INTO ?? (??) VALUES (?)", [table, cols, values], function(error, data){
+                if(error){console.log(query.sql); throw error};
 
-                func(data);
+                func(data.insertId);
                 pool.closeConnection(connection);
             });
         });
