@@ -73,6 +73,21 @@ h1 .navbar-brand {
     font-size: .80em;
 }
 
+.form-control {
+    font-size: 1.5em;
+    height: auto;
+    margin-right: 10px;
+    width: auto;
+}
+
+.form-group {
+    display: inline-block;
+}
+
+#lastName, #email, #password {
+    margin: 0px;
+}
+
 .marketing h3 {
     color: #CD5C5C;
     font-size: 4em;
