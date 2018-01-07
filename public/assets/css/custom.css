@@ -1,3 +1,4 @@
+/*** WELCOME PAGE ***/
 h1 .navbar-brand {
     color: orange;
     font-family: 'Bangers', cursive;
@@ -16,11 +17,11 @@ h1 .navbar-brand {
 }
 
 #masthead {
-    margin-bottom: 0px;
     background-image: url('../images/running.jpg');
     background-position: 0% 25%;
     background-size: cover;
     background-repeat: no-repeat;
+    box-shadow: 3px 3px 10px #404040;    
     margin-bottom: 15px;
 }
 
@@ -29,7 +30,7 @@ h1 .navbar-brand {
     font-size: 4em;
     font-weight: bold;
     text-align: right;
-    text-shadow: 2px 2px 2px #404040;
+    text-shadow: 3px 3px 3px #404040;
 }
 
 #masthead p {
@@ -37,17 +38,18 @@ h1 .navbar-brand {
     font-size: 2em;
     line-height: 1.15em;
     text-align: right;
-    text-shadow: 3px 3px 3px black;
+    text-shadow: 3px 3px 3px #404040;
 }
 
 #masthead button {
-    /* border-radius: 10px; */
+    box-shadow: 2px 2px 3px #404040;    
     font-size: 1.75em;
     margin-right: 30px;
     width: 25%;
 }
 
 #login {
+    box-shadow: 2px 2px 3px #404040;        
     float: right;
     font-size: 1.5em;
     margin-top: 25px;
@@ -67,12 +69,13 @@ h1 .navbar-brand {
 }
 
 #login span {
+    color: gray;
     font-size: .80em;
 }
 
 .marketing h3 {
-    color: #546469;
-    font-size: 3em;
+    color: #CD5C5C;
+    font-size: 4em;
     font-weight: 700;
     text-align: center;
 }
@@ -88,7 +91,6 @@ h1 .navbar-brand {
 
 .jumbotron {
     background-image: url("../images/race_path_gradient.jpg");
-    /* background-position: 0% 25%; */
     background-size: cover;
     background-repeat: no-repeat;
     color: #ffffff;
@@ -100,5 +102,61 @@ h1 .navbar-brand {
 }
 
 .featurette-heading {
+    font-size: 3em;
     margin-top: 40px;
+}
+
+/*** ACTIVITY PAGE ***/
+
+h2 {
+    font-size: 1.5em;
+}
+
+h3 {
+    font-size: 1.4em;
+    margin-bottom: 5px;
+}
+
+h4 {
+    font-size: 1.2em;
+    margin-bottom: 5px;    
+}
+
+#wrapper {
+    margin: 0 0 20px 0;
+    padding: 0;
+    width: 100%;
+}
+
+#displayStats {
+    padding: 0;
+}
+#leftPanel {
+    background-color: #ababab;
+    height: 525px;
+    margin: 0;
+    padding-left: 20px; 
+}
+
+#raceTracker {
+    background-color: #cdcdcd;
+    height: 325px;
+    margin: 0;
+}
+
+#raceStats {
+    background-color: #efefef;
+    height: 200px;
+    margin: 0;
+    padding: 0;
+}
+
+legend {
+    margin: 0 0 10px 0;
+    padding-top: 15px;
+}
+
+form #date, #distance, #time  {
+    height: 22px;
+    margin-bottom: 8px;
 }
