@@ -15,10 +15,23 @@ var orm = {
     },
     selectOne:function(table, conCol, condition, func){
         pool.getConnection().then(function(connection){
-            connection.query("SELECT * FROM ?? WHERE ?? = ?", [table, conCol, condition], function(error, data){
+            var q =connection.query("SELECT * FROM ?? WHERE ?? = ?", [table, conCol, condition], function(error, data){
+                if(error) throw error;
+                
+                func(data[0]);
+
+                pool.closeConnection(connection);
+            });
+            console.log(q.sql);
+        });
+    },
+    selectId:function(table, conCol1, cond1, conCol2, cond2, func){
+        pool.getConnection().then(function(connection){
+            connection.query("SELECT id FROM ?? WHERE ?? = ? AND ?? = ?",
+                [table, conCol1, cond1, conCol2, cond2], function(error, data){
                 if(error) throw error;
 
-                func(data);
+                func(data[0].id);
 
                 pool.closeConnection(connection);
             });
@@ -26,10 +39,10 @@ var orm = {
     },
     insertOne: function(table, cols, values, func){
         pool.getConnection().then(function(connection){
-            connection.query("INSERT INTO ?? (??) VALUES (?)", [table, cols, values], function(error, data){
-                if(error) throw error;
+            var query = connection.query("INSERT INTO ?? (??) VALUES (?)", [table, cols, values], function(error, data){
+                if(error){console.log(query.sql); throw error};
 
-                func(data);
+                func(data.insertId);
                 pool.closeConnection(connection);
             });
         });
