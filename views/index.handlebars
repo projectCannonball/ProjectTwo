@@ -14,10 +14,12 @@
                         <h3 class="panel-title">Member Sign In</h3>
                     </div>
                     <div class="panel-body">
-                        <input type="text" name="username" placeholder=" Username"><br>
-                        <input type="text" name="password" placeholder=" Password"><br>
-                        <input type="submit" value="Sign In" class="btn btn-danger">
-                        <span>Don't have an Account? <a href="#" data-toggle="modal" data-target="#signUp">Create Account</a></span>
+                        <form action="/activity" method="POST">
+                            <input type="text" name="userName" placeholder=" Username"><br>
+                            <input type="text" name="password" placeholder=" Password"><br>
+                            <input type="submit" value="Sign In" class="btn btn-danger">
+                            <span>Don't have an Account? <a href="#" data-toggle="modal" data-target="#signUp">Create Account</a></span>
+                        </form>
                     </div>
                 </div> <!-- .login -->
             </div>
@@ -38,17 +40,17 @@
                     <form role="form" action="/" method="POST">
                         <div class="form-group">
                             <label for="">First Name</label>
-                            <input type="text" class="form-control" name="firstName" size="18">
+                            <input type="text" class="form-control" id="firstName" name="firstName" size="18">
                         </div>
 
                         <div class="form-group">
                             <label for="">Last Name</label>
-                            <input type="text" class="form-control" name="lastName">
+                            <input type="text" class="form-control" id="lastName" name="lastName">
                         </div>
 
                         <div class="form-group">
                             <label for="">City</label>
-                            <input type="text" class="form-control" name="city" size="10">
+                            <input type="text" class="form-control" id="city" name="city" size="10">
                         </div>
 
                         <div class="form-group">
@@ -110,17 +112,17 @@
 
                         <div class="form-group">
                             <label for="">Email</label>
-                            <input type="text" class="form-control" name="email" size="18">
+                            <input type="text" class="form-control" id="email" name="email" size="18">
                         </div>
     
                         <div class="form-group">
                             <label for="">Username</label>
-                            <input type="text" class="form-control" name="userName" size="18">
+                            <input type="text" class="form-control" id="userName" name="userName" size="18">
                         </div>
 
                         <div class="form-group">
                             <label for="">Password</label>
-                            <input type="password" class="form-control" name="password">
+                            <input type="password" class="form-control" id="password" name="password">
                         </div>
 
                         <button type="submit" class="btn btn-success btn-lg submit">Submit</button>

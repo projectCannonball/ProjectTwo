@@ -13,7 +13,7 @@ var userRace_history = require("../models/userRaceModel.js");
 //main activity route shows home page
 router.get("/:id", function(req, res) {
     user.one(req.params.id, function(data){
-        res.render("activity", {user: data});
+        res.render("activity", data);
     });
 });
 
@@ -22,9 +22,18 @@ router.get("*", function(req, res) {
   res.render("index");
 });
 
+//main update route for the devour button
+router.put("/:id", function(req, res) {
+    user.update({
+    devoured: true
+  }, req.params.id, function() {
+    res.redirect("/");
+  });
+});
+
 //main post route that creates the new user
 router.post("/", function(req, res) {
-    user.insert([
+  user.insert([
     "userName", "firstName", "lastName", "password",
     "city", "state", "email"
   ], [
@@ -35,12 +44,15 @@ router.post("/", function(req, res) {
   });
 });
 
-//main update route for the devour button
-router.put("/:id", function(req, res) {
-    user.update({
-    devoured: true
-  }, req.params.id, function() {
-    res.redirect("/");
+//main route to the activity page for sign in
+router.post("/activity", function(req, res){
+  user.login("userName", req.body.userName, "password", req.body.password,
+  function(id){
+    console.log("User ID Logged In: "+id)
+    if(id)
+      res.redirect("/"+id);
+    else
+      res.redirect("/");
   });
 });
 
