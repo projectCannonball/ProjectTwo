@@ -16,51 +16,74 @@
             <p>826 miles</p> 
         </div>
 
-        <div id="raceTracker" class="row col-md-10">
+        <div id="raceTracker" class="col-md-7">
             <h2>RACE TRACKER</h2>
         </div>
-        
-        <div id="raceStats" class="row col-md-10">
-            <div id="displayStats" class="col-md-8">
-                <div class="col-md-4">
+        <div id="barChart" class="col-md-3">
+            <h2>BAR CHART</h2>
+        </div>
+
+        <div id="raceStats" class="col-md-10">
+                <div class="col-md-3">
                     <h2>RACE STATS</h2>
                     <h4>Distance Covered</h4>
                     <p>72 miles</p>
                     <h4>Duration</h4>
                     <p>10.8 hours</p>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <h2>&nbsp</h2>
                     <h4>Current Position</h4>
                     <p>5th</p>
                     <h4>Average Pace</h4>
                     <p>9.1 minute mile</p>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <h2>&nbsp</h2>
                     <h4>Average Speed</h4>
                     <p>6.6 mph</p>
                     <h4>Total # of Racers</h4>
                     <p>106</p>
                 </div>                     
-            </div>
-            <div id="enterStats" class="row pull-right col-md-4">
-                <form>
-                    <fieldset>
-                        <legend>New Achievement</legend>
-                        Date: <input id="date" type="date" name=""><br>
-                        Distance: <input id="distance" type="text" name="" size="4"> miles<br>
-                        Time: <input id="time" type="text" name="" size="4"> minutes<br>
-                        <input type="submit" value="Submit">
-                    </fieldset>
-                </form>
+            <div id="enterStats" class="pull-right col-md-3">
+                <button type="submit" id="update" class="btn btn-danger btn-lg submit" data-toggle="modal" data-target="#updateModal">Update Stats</button>
             </div> 
         </div>
     </div>
-    <div class="container">
-        <!-- FOOTER -->
-        <footer>
-            <p class="pull-right"><a href="#">Back to top</a></p>
-            <p>&copy; 2017 Cannonball Run &middot; <a href="https://github.com/projectCannonball/ProjectTwo">A Github Project</a></p>
-        </footer>
-    </div><!-- /.container -->
+
+    <!-- Modal -->
+    <div id="updateModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h2 class="modal-title">New Achievement</h2>
+                </div>
+                <div class="modal-body">
+                    <!-- form content-->
+                    <form>
+                        <fieldset>
+                            <div class="form-group"> 
+                                <label for="">Date</label>
+                                <input type="date" class="form-control" id="date" name="entryDate">
+                            </div>
+                            <div class="form-group">
+                                <label for="">Dist. (miles)</label>                            
+                                <input type="text" class="form-control" id="distance" name="distance">
+                            </div>
+                            <div class="form-group">                                                                 
+                                <label for="">HH</label>
+                                <input type="text" class="form-control" id="hours" name="hours">
+                            </div>
+                            <div class="form-group"> 
+                                <label for="">MM</label>
+                                <input type="text" class="form-control" id="minutes" name="minutes" maxlength="2">
+                            </div>
+                            <button type="submit" class="btn btn-danger btn-lg submit">Submit</button>
+                        </fieldset>
+                    </form> <!-- /end form -->
+                </div>
+            </div>
+        </div>
+    </div> <!-- /end Modal -->
