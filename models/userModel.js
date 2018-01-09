@@ -2,9 +2,15 @@
 var orm = require("../config/orm.js");
 
 var user = {
-    //selectAll() 
+    //selectOne() 
     one: function(condition, cb) {
         orm.selectOne("USERS", "id", condition, function(res) {
+            cb(res);
+        });
+    },
+    //login() 
+    login: function(col1, cond1, col2, cond2, cb) {
+        orm.selectId("USERS", col1, cond1, col2, cond2, function(res) {
             cb(res);
         });
     },

@@ -10,24 +10,16 @@ var race = require("../models/raceModel.js");
 var user_race = require("../models/userRaceHistoryModel.js");
 var userRace_history = require("../models/userRaceModel.js");
 
-//main index route that grabs all the info
-router.get("/:id?", function(req, res) {
+//main activity route shows home page
+router.get("/:id", function(req, res) {
     user.one(req.params.id, function(data){
-        res.render("index", {user: data});
+        res.render("activity", data);
     });
 });
 
-//main post route that creates the new user
-router.post("/", function(req, res) {
-    user.create([
-    "userName", "firstName", "lastName", "password",
-    "height", "weight", "race", "age", "sex",
-    "city", "state"
-  ], [
-    req.body
-  ], function(id) {
-    res.redirect("/"+id);
-  });
+//main index route shows home page
+router.get("*", function(req, res) {
+  res.render("index", {error:false});
 });
 
 //main update route for the devour button
@@ -36,6 +28,30 @@ router.put("/:id", function(req, res) {
     devoured: true
   }, req.params.id, function() {
     res.redirect("/");
+  });
+});
+
+//main post route that creates the new user
+router.post("/", function(req, res) {
+  user.insert([
+    "userName", "firstName", "lastName", "password",
+    "city", "state", "email"
+  ], [
+    req.body.userName, req.body.firstName, req.body.lastName, req.body.password,
+    req.body.city, req.body.state, req.body.email
+  ], function(id) {
+    res.redirect("/"+id);
+  });
+});
+
+//main route to the activity page for sign in
+router.post("/activity", function(req, res){
+  user.login("userName", req.body.userName, "password", req.body.password,
+  function(id){
+    if(id)
+      res.redirect("/"+id);
+    else
+      res.render("index", {error:true});
   });
 });
 

@@ -3,7 +3,7 @@ CREATE TABLE Users (
 	userName VARCHAR(255) NOT NULL,
 	firstName VARCHAR(255) NOT NULL,
 	lastName VARCHAR(255) NOT NULL,
-	password VARCHAR(255) NOT NULL,
+	password VARCHAR(255) NOT NULL COLLATE utf8_bin,
 	height INT UNSIGNED,
 	weight INT UNSIGNED,
 	race VARCHAR(255),
@@ -11,6 +11,7 @@ CREATE TABLE Users (
 	sex VARCHAR(255),
 	city VARCHAR(255),
 	state VARCHAR(255),
+    email VARCHAR(255),
 	create_ts TIMESTAMP NOT NULL DEFAULT current_timestamp,
 	update_ts TIMESTAMP NOT NULL DEFAULT current_timestamp ON UPDATE current_timestamp
 );
