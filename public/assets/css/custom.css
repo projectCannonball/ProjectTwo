@@ -44,7 +44,7 @@ h1 .navbar-brand {
 #masthead button {
     box-shadow: 2px 2px 3px #404040;    
     font-size: 1.75em;
-    margin-right: 30px;
+    margin-left: 30px;
     width: 25%;
 }
 
@@ -55,17 +55,23 @@ h1 .navbar-brand {
     margin-top: 25px;
     width: 30%;
 }
+
 #login .panel-title {
+    color: #555;
     font-size: 1.25em;
 }
 
 #login input {
+    color: #555555;
     margin-bottom: 10px;
+    padding: 0 5px;
     width: 100%;
 }
 
 #login input[type='submit'] {
-    font-weight: bold;
+    color: white;
+    font-size: 1.25em;
+    height: 50px;
 }
 
 #login span {
@@ -129,12 +135,20 @@ h2 {
 
 h3 {
     font-size: 1.4em;
-    margin-bottom: 5px;
+    margin-bottom: 3px;
 }
 
 h4 {
     font-size: 1.2em;
-    margin-bottom: 5px;    
+    margin-bottom: 2px;    
+}
+
+#wrapper h2 {
+    color: darkorange;
+}
+
+#wrapper h3 {
+    color: #c3c3c3;
 }
 
 #wrapper {
@@ -143,11 +157,17 @@ h4 {
     width: 100%;
 }
 
+#wrapper p {
+    font-size: 1.2em;
+}
+
 #displayStats {
     padding: 0;
 }
+
 #leftPanel {
-    background-color: #ababab;
+    background-color: black;
+    color: white;
     height: 525px;
     margin: 0;
     padding-left: 20px; 
@@ -155,23 +175,54 @@ h4 {
 
 #raceTracker {
     background-color: #cdcdcd;
+    box-shadow: 0 3px 10px #404040;    
     height: 325px;
     margin: 0;
 }
 
+#barChart {
+    background: black;
+    box-shadow: 0 3px 10px #404040;        
+    height: 325px;
+    
+}
+
 #raceStats {
-    background-color: #efefef;
     height: 200px;
     margin: 0;
     padding: 0;
 }
 
-legend {
-    margin: 0 0 10px 0;
-    padding-top: 15px;
+#raceStats h2 {
+    color: #CD5C5C;
 }
 
-form #date, #distance, #time  {
-    height: 22px;
-    margin-bottom: 8px;
+#raceStats h4 {
+    color: #CD5C5C;
+}
+
+#update {
+    margin-top: 70px;
+}
+
+#updateModal .modal-dialog {
+    width: 265px;
+}
+
+#updateModal .form-group {
+    display: inline-block;
+}
+
+#date {
+    margin-right: 0;
+}
+
+#distance {
+    margin-right: 14px;
+    width: 80px;
+}
+
+#hours, #minutes {
+    margin: 0 0 0 5px;
+    width: 60px;
 }
