@@ -19,7 +19,7 @@ router.get("/:id", function(req, res) {
 
 //main index route shows home page
 router.get("*", function(req, res) {
-  res.render("index");
+  res.render("index", {error:false});
 });
 
 //main update route for the devour button
@@ -48,11 +48,10 @@ router.post("/", function(req, res) {
 router.post("/activity", function(req, res){
   user.login("userName", req.body.userName, "password", req.body.password,
   function(id){
-    console.log("User ID Logged In: "+id)
     if(id)
       res.redirect("/"+id);
     else
-      res.redirect("/");
+      res.render("index", {error:true});
   });
 });
 

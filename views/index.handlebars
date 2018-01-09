@@ -10,6 +10,9 @@
                 </div>
                 <!-- LOGIN -->
                 <div id="login" class="panel panel-default">
+                    {{#if error}}
+                        {{> errors/login-error}}
+                    {{/if}}
                     <div class="panel-heading">
                         <h3 class="panel-title">Member Sign In</h3>
                     </div>
