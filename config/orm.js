@@ -31,7 +31,10 @@ var orm = {
                 [table, conCol1, cond1, conCol2, cond2], function(error, data){
                 if(error) throw error;
 
-                func(data[0].id);
+                if(data[0])
+                    func(data[0].id);
+                else
+                    func(null);
 
                 pool.closeConnection(connection);
             });

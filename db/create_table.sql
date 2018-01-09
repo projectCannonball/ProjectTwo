@@ -3,7 +3,7 @@ CREATE TABLE Users (
 	userName VARCHAR(255) NOT NULL,
 	firstName VARCHAR(255) NOT NULL,
 	lastName VARCHAR(255) NOT NULL,
-	password VARCHAR(255) NOT NULL,
+	password VARCHAR(255) NOT NULL COLLATE utf8_bin,
 	height INT UNSIGNED,
 	weight INT UNSIGNED,
 	race VARCHAR(255),
