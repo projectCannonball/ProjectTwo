@@ -5,8 +5,8 @@
                     <p>Cannonball Run is a racing app<br>
                         that pits you against others in<br>
                         a fun virtual race course.</p>><br>
-                    <button class="btn btn-primary" data-toggle="modal" data-target="#signUp">Sign Up</button>
-                    <a href="/activity"><button class="btn btn-warning">Learn More</button></a>
+                    <button class="btn btn-primary pull-right" data-toggle="modal" data-target="#signUp">Sign Up</button>
+                    <a href="/activity"><button class="btn btn-warning pull-right">Learn More</button></a>
                 </div>
                 <!-- LOGIN -->
                 <div id="login" class="panel panel-default">
@@ -19,14 +19,14 @@
                     <div class="panel-body">
                         <form action="/activity" method="POST">
                             <input type="text" name="userName" placeholder=" Username"><br>
-                            <input type="text" name="password" placeholder=" Password"><br>
+                            <input type="password" name="password" placeholder=" Password"><br>
                             <input type="submit" value="Sign In" class="btn btn-danger">
                             <span>Don't have an Account? <a href="#" data-toggle="modal" data-target="#signUp">Create Account</a></span>
                         </form>
                     </div>
                 </div> <!-- .login -->
-            </div>
-        </div> <!-- /end masthead -->
+            </div> <!-- .container -->
+        </div> <!-- .end masthead -->
     </div> <!-- .row -->
 
     <!-- Modal -->
@@ -115,7 +115,7 @@
 
                         <div class="form-group">
                             <label for="">Email</label>
-                            <input type="text" class="form-control" id="email" size="18">
+                            <input type="email" class="form-control" id="email" size="18">
                         </div>
     
                         <div class="form-group">
@@ -125,7 +125,7 @@
 
                         <div class="form-group">
                             <label for="">Password</label>
-                            <input type="email" class="form-control" id="password">
+                            <input type="password" class="form-control" id="password">
                         </div>
 
                         <button type="submit" class="btn btn-success btn-lg submit">Submit</button>

@@ -1,11 +1,9 @@
     <div id="wrapper" class="row col-md-12">
         <div id="leftPanel" class="col-md-2">
             <h2>DASHBOARD</h2>
-            <h3>Info</h3>
             <p>{{firstName}} {{lastName}}<br>
             {{city}}, {{state}}</p>
             
-            <h3>History</h3>
             <h4>Total Races</h4>
             <p>10</p>
             
@@ -13,41 +11,117 @@
             <p>2</p>
             
             <h4>Total Distance</h4>
-            <p>826 miles</p> 
-        </div>
+            <p>826 miles</p>
+            <br>
+            <div class="text-center">
+                <button type="submit" id="startRace" class="btn center btn-default btn-block" data-toggle="modal" data-target="#newRaceModal"><span class="glyphicon glyphicon-road"></span> Start New Race</button>
+                <button type="submit" id="joinRace" class="btn center btn-default btn-block" data-toggle="modal" data-target="#joinRaceModal"><span class="glyphicon glyphicon-ok"></span> Join a Race</button>
+                <button type="submit" id="joinRace" class="btn center btn-default btn-block" data-toggle="modal" data-target="#startRaceModal"><span class="glyphicon glyphicon-stats"></span> Your Past Races</button>
+            </div>
+        </div><!-- end leftPanel -->
+
+        <!-- Modal -->
+        <div id="newRaceModal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h2 class="modal-title">Start New Race</h2>
+                    </div>
+                    <div class="modal-body">
+                        <!-- form content-->
+                        <form role="form">
+                            <div class="form-group">
+                                <label for="">Name of Your Race</label>
+                                <input type="text" class="form-control" id="raceName">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="">Race type</label>
+                                <select class="form-control">
+                                    <option value="run">Run</option>
+                                    <option value="bike">Bike</option>
+                                    <option value="walk">Walk</option>	
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="">Start Location</label>
+                                <input type="text" class="form-control" id="startLocation">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="">End Location</label>
+                                <input type="text" class="form-control" id="endLocation">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="">Start Date</label>
+                                <input type="date" class="form-control" id="startDate">
+                            </div>
+        
+                            <div class="form-group">
+                                <label for="">End Date</label>
+                                <input type="date" class="form-control" id="endDate">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="">Member Limit</label>
+                                <input type="number" class="form-control" id="limit" min="1" max="100">
+                            </div>
+
+                            <button type="submit" class="btn btn-success btn-lg submit">Create</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div> <!-- /end Modal -->
+
 
         <div id="raceTracker" class="col-md-7">
             <h2>RACE TRACKER</h2>
         </div>
+
         <div id="barChart" class="col-md-3">
             <h2>BAR CHART</h2>
         </div>
 
         <div id="raceStats" class="col-md-10">
+            <div class="col-md-12">
+                <div class="col-md-9">
+                    <h2>Current Race Name</h2>
+                </div>
+                <div id="enterStats" class="col-md-3">
+                    <button type="submit" id="update" class="btn btn-md btn-danger pull-right" data-toggle="modal" data-target="#updateModal"><span class="glyphicon glyphicon-plus"></span> Update Progress</button>
+                </div>
+            </div>
+            
+            <div class="col-md-12">
                 <div class="col-md-3">
-                    <h2>RACE STATS</h2>
                     <h4>Distance Covered</h4>
                     <p>72 miles</p>
                     <h4>Duration</h4>
                     <p>10.8 hours</p>
                 </div>
                 <div class="col-md-3">
-                    <h2>&nbsp</h2>
-                    <h4>Current Position</h4>
-                    <p>5th</p>
                     <h4>Average Pace</h4>
                     <p>9.1 minute mile</p>
-                </div>
-                <div class="col-md-3">
-                    <h2>&nbsp</h2>
                     <h4>Average Speed</h4>
                     <p>6.6 mph</p>
+                </div>
+                <div class="col-md-3">
+                    <h4>Current Position</h4>
+                    <p>5th</p>
+
                     <h4>Total # of Racers</h4>
                     <p>106</p>
-                </div>                     
-            <div id="enterStats" class="pull-right col-md-3">
-                <button type="submit" id="update" class="btn btn-danger btn-lg submit" data-toggle="modal" data-target="#updateModal">Update Stats</button>
-            </div> 
+                </div>
+                <div class="col-md-3">
+                    <h4>Distance Remaining</h4>
+                    <p>152 miles</p>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -58,27 +132,31 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h2 class="modal-title">New Achievement</h2>
+                    <h2 class="modal-title">Update Progress</h2>
                 </div>
                 <div class="modal-body">
                     <!-- form content-->
-                    <form>
+                    <form id="updateForm">
                         <fieldset>
                             <div class="form-group"> 
                                 <label for="">Date</label>
                                 <input type="date" class="form-control" id="date" name="entryDate">
                             </div>
                             <div class="form-group">
-                                <label for="">Dist. (miles)</label>                            
-                                <input type="text" class="form-control" id="distance" name="distance">
+                                <label for="">Distance</label>                            
+                                <input type="number" class="form-control" id="distance" name="distance">
+                            </div>
+                            <div class="form-group">
+                                <input type="radio" id="miles" name="miles" value="miles"> Miles <br>
+                                <input type="radio" id="kilometers" name="kilometers" value="kilometers"> Kilometers
                             </div>
                             <div class="form-group">                                                                 
-                                <label for="">HH</label>
-                                <input type="text" class="form-control" id="hours" name="hours">
+                                <label for="">Hours</label>
+                                <input type="number" class="form-control" id="hours" name="hours" min="1" max="99">
                             </div>
                             <div class="form-group"> 
-                                <label for="">MM</label>
-                                <input type="text" class="form-control" id="minutes" name="minutes" maxlength="2">
+                                <label for="">Minutes</label>
+                                <input type="number" class="form-control" id="minutes" name="minutes" min="1" max="59">
                             </div>
                             <button type="submit" class="btn btn-danger btn-lg submit">Submit</button>
                         </fieldset>
