@@ -17,6 +17,12 @@ router.get("/:id", function(req, res) {
     });
 });
 
+router.get("/:userid/:raceid", function(req, res){
+  userRace_history.chartSelectedInfo(["user_id", "race_id"], [req.params.userid, req.params.raceid], function(data){
+    res.send(data);
+  })
+});
+
 //main index route shows home page
 router.get("*", function(req, res) {
   res.render("index", {error:false});
@@ -54,6 +60,8 @@ router.post("/activity", function(req, res){
       res.render("index", {error:true});
   });
 });
+
+
 
 // Export routes for server.js to use.
 module.exports = router;

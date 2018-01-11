@@ -50,6 +50,7 @@ CREATE TABLE userRace_history (
     user_id INT NOT NULL,
     race_id INT NOT NULL,
     distance DECIMAL(7,4) NOT NULL,
+    activityDt DATE NOT NULL,
     time BIGINT NOT NULL,
     create_ts TIMESTAMP NOT NULL DEFAULT current_timestamp,
     foreign key urh_user_id_fk (user_id) references users(id) ON UPDATE CASCADE ON DELETE RESTRICT,
