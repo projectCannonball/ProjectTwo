@@ -28,6 +28,7 @@ CREATE TABLE Races (
     endLat DECIMAL(7,4) NOT NULL,
     endLon DECIMAL(7,4) NOT NULL,
     type VARCHAR(255),
+    route LONGTEXT NOT NULL,
     create_ts TIMESTAMP NOT NULL DEFAULT current_timestamp,
     update_ts TIMESTAMP NOT NULL DEFAULT current_timestamp ON UPDATE current_timestamp
 );
