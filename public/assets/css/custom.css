@@ -156,50 +156,53 @@ h4 {
 }
 
 #wrapper {
-    margin: 0 0 20px 0;
-    padding: 0;
-    width: 100%;
+    background-color: white;
+    min-height: calc(100vh -82px - 20px);
 }
 
 #wrapper p {
     font-size: 1.2em;
 }
 
-/* #displayStats {
-    padding: 0;
-} */
+#wrapper .modal h2 {
+    color: #555;
+}
 
 #leftPanel {
     background-color: black;
     color: lightgrey;
-    height: 525px;
     margin: 0;
-    padding-left: 40px; 
+    padding: 0 20px 24px 40px; 
 }
 
 #leftPanel h4 {
-    color: #6a6a6a
+    color: #6a6a6a;
 }
 
 #raceTracker {
-    background-color: #cdcdcd;
-    box-shadow: 0 3px 10px #404040;    
-    height: 325px;
-    margin: 0;
-    padding:0;
+
+    background: lightgrey;
+    min-height: 425px;
+    padding: 0;
+}
+
+#map {
+    position:relative;
+    height:100%;
+    width:100%;
 }
 
 #barChart {
-    background: black;
-    box-shadow: 0 3px 10px #404040;        
-    height: 325px;
+    background-color: darkgray;
+    min-height: 425px;
 }
 
 #raceStats {
+    background-color: white;
     color: #888;
-    height: 200px;
-    margin: 0;
-    padding: 0;
+    margin-bottom: 40px;
+    padding: 0 10px;
+
 }
 
 #raceStats h2 {
@@ -214,6 +217,13 @@ h4 {
 #update {
     margin-top: 15px;
 }
+
+footer {
+    padding: 0 20px;
+}
+
+
+/*** ALL MODALS ***/
 
 #updateModal .modal-dialog {
     width: 265px;
@@ -235,7 +245,7 @@ h4 {
 
 #distance {
     margin-right: 23px;
-    width: 80px;
+    width: 100px;
 }
 
 #hours, #minutes {
@@ -243,8 +253,3 @@ h4 {
     width: 70px;
 }
 
-#map {
-    position:relative;
-    height:100%;
-    width:100%;
-}
