@@ -1,7 +1,7 @@
 var express = require("express");
 var bodyParser = require("body-parser");
 var methodOverride = require("method-override");
-var Chart = require("chart.js");
+//var Chart = require("chart.js");
 
 var port = process.env.PORT || 3000;
 

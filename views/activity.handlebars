@@ -20,35 +20,8 @@
             <h2>RACE TRACKER</h2>
         </div>
         <div id="raceChart" class="col-md-3">
-            <h2>RACE CHART</h2>
-            <canvas id="myChart" width="400" height="400"></canvas>
-            <script>
-                 var ctx = document.getElementById("myChart");
-                    var myChart = new Chart(ctx, {
-                        type: 'bar',
-                        data: {
-                           labels : ["January","February","March","April","May","June"],
-                            datasets : [
-                                {
-                                    fillColor : "rgba(172,194,132,0.4)",
-                                    strokeColor : "#ACC26D",
-                                    pointColor : "#fff",
-                                    pointStrokeColor : "#9DB86D",
-                                    data : [203,156,99,251,305,247]
-                                }
-                        ]},
-                        options: {
-                            scales: {
-                                yAxes: [{
-                                    ticks: {
-                                        beginAtZero:true
-                                    }
-                                }]
-                            }
-                        }
-                    });
-            </script>
-
+            <h2>CURRENT RACE CHART</h2>
+            <canvas id="myChart"></canvas>
         </div>
 
         <div id="raceStats" class="col-md-10">
@@ -115,3 +88,8 @@
             </div>
         </div>
     </div> <!-- /end Modal -->
+
+    <script src="/assets/js/currentRace.js" type="text/javascript"></script>
+    <script>
+        currentRace();
+    </script>
