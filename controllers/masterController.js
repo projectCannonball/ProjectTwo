@@ -24,6 +24,20 @@ router.get("/:userid/:raceid", function(req, res){
   })
 });
 
+router.get("/new/:id", function(req, res){
+  user.one(req.params.id, function(data){
+    res.render("newRace", data);
+  });
+});
+
+router.get("/join/:id", function(req, res){
+  res.render("joinRace");
+});
+
+router.get("/past/:id", function(req, res){
+  res.render("pastRaces");
+});
+
 //main index route shows home page
 router.get("*", function(req, res) {
   res.render("index", {error:false});
