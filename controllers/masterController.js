@@ -7,17 +7,21 @@ var router = express.Router();
 // Import the model to use its database functions.
 var user = require("../models/userModel.js");
 var race = require("../models/raceModel.js");
-var user_race = require("../models/userRaceHistoryModel.js");
-var userRace_history = require("../models/userRaceModel.js");
+var user_race = require("../models/userRaceModel.js");
+var userRace_history = require("../models/userRaceHistoryModel.js");
+
 
 //main activity route shows home page
 router.get("/:id", function(req, res) {
     user.one(req.params.id, function(data){
+      console.log(data);
         res.render("activity", data);
     });
 });
 
 router.get("/:userid/:raceid", function(req, res){
+  console.log("user_id: "+req.params.userid)
+  console.log("race_id: "+req.params.raceid);
   userRace_history.chartSelectedInfo(["user_id", "race_id"], [req.params.userid, req.params.raceid], function(data){
     res.send(data);
   })

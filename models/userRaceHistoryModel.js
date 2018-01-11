@@ -24,9 +24,9 @@ var userRace_history = {
     chartSelectedInfo: function(conCols, conds, cb){
         orm.selectAllwTwoCon("USERRACE_HISTORY", conCols[0], conds[0], conCols[1], conds[1], function(res){
             var results = {'x':[],'y':[]};
-            for (i in data) {
-                results.x.push(data[i].activityDt);
-                results.y.push(data[i].distance);
+            for (i in res) {
+                results.x.push(res[i].activityDt);
+                results.y.push(res[i].distance);
             }
             cb(results);
         })

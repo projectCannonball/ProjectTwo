@@ -4,13 +4,14 @@ var currentRace = function() {
 
     var userid = $("#currUserID").attr("value");
     var raceid = $("#currRaceID").attr("value");
+    console.log("http://localhost:3000/"+userid+"/"+raceid);
 
     $.ajax({
-        url: "/"+userid+"/"+raceid,
+        url: "http://localhost:3000/"+userid+"/"+raceid,
         method: "GET" 
     }).done(function(response) {
     
-        console.log(response);
+        //console.log(response);
         
         var ctx = document.getElementById("myChart");
 
