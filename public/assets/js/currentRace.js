@@ -11,7 +11,10 @@ var currentRace = function() {
         method: "GET" 
     }).done(function(response) {
     
-        //console.log(response);
+        for (i in response.x) {
+            var dt = new Date(response.x[i]);
+            response.x[i] = (1+dt.getMonth())+"-"+dt.getDate()+"-"+dt.getFullYear();
+        };
         
         var ctx = document.getElementById("myChart");
 
