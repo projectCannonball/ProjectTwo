@@ -175,30 +175,4 @@ function addLatLng(event) {
     }
     markers = [];
   }
-
-  // switch (true) {
-  // 	case (draw && arr.length === 2):
-  // 		draw = !draw;
-  // 		arr = [];
-  // 		break;
-		// case (arr.length < 2):
-		// 	marker = new google.maps.Marker({
-	 //      position: event.latLng,
-	 //      map: map
-	 //    });
-	 //    markers.push(marker);
-	 //    arr.push(event.latLng);
-	 //    break;
-  //   case (!draw && arr.length === 2):
-  //   	draw = true;
-	 //    calculateAndDisplayRoute(directionService, directionDisplay);
-	 //    for(let key in markers) {
-	 //      markers[key].setMap(null);
-	 //    }
-	 //    markers = [];
-	 //    break;
-  // }
-
-
-
 }
