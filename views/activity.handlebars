@@ -1,6 +1,12 @@
     <div id="main" class="row">
         <div id="leftPanel" class="col-md-2">
             <h2>DASHBOARD</h2>
+
+            <!-- this is for purposes of grabbing the current displayed race line graph-->
+            <div id="currUserID" value={{ID}} hidden></div>
+            <div id="currRaceID" value="1" hidden></div>
+            <!-- back to the HTML -->
+
             <p>{{firstName}} {{lastName}}<br>
             {{city}}, {{state}}</p>
             
@@ -183,8 +189,6 @@
 
     </div> <!-- /end Modal -->
 
+    <!--install chart.js CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
     <script src="/assets/js/currentRace.js" type="text/javascript"></script>
-    <script>
-        currentRace();
-    </script>
-

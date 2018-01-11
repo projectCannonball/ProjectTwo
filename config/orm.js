@@ -13,6 +13,21 @@ var orm = {
             });
         });
     },
+    selectAllwTwoCon:function(table, conCol1, cond1, conCol2, cond2, func){
+        pool.getConnection().then(function(connection){
+            connection.query("SELECT * FROM ?? WHERE ?? = ? AND ?? = ?",
+                [table, conCol1, cond1, conCol2, cond2], function(error, data){
+                if(error) throw error;
+
+                if(data)
+                    func(data);
+                else
+                    func(null);
+
+                pool.closeConnection(connection);
+            });
+        });
+    },
     selectOne:function(table, conCol, condition, func){
         pool.getConnection().then(function(connection){
             var q =connection.query("SELECT * FROM ?? WHERE ?? = ?", [table, conCol, condition], function(error, data){
