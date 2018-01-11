@@ -55,6 +55,10 @@ h1 .navbar-brand {
     margin-top: 25px;
     width: 30%;
 }
+#login h4 {
+    color: red;
+    text-align: center;
+}
 
 #login .panel-title {
     color: #555;
@@ -161,16 +165,20 @@ h4 {
     font-size: 1.2em;
 }
 
-#displayStats {
+/* #displayStats {
     padding: 0;
-}
+} */
 
 #leftPanel {
     background-color: black;
-    color: white;
+    color: lightgrey;
     height: 525px;
     margin: 0;
-    padding-left: 20px; 
+    padding-left: 40px; 
+}
+
+#leftPanel h4 {
+    color: #6a6a6a
 }
 
 #raceTracker {
@@ -184,10 +192,10 @@ h4 {
     background: black;
     box-shadow: 0 3px 10px #404040;        
     height: 325px;
-    
 }
 
 #raceStats {
+    color: #888;
     height: 200px;
     margin: 0;
     padding: 0;
@@ -195,6 +203,7 @@ h4 {
 
 #raceStats h2 {
     color: #CD5C5C;
+    font-weight: 700;
 }
 
 #raceStats h4 {
@@ -202,7 +211,7 @@ h4 {
 }
 
 #update {
-    margin-top: 70px;
+    margin-top: 15px;
 }
 
 #updateModal .modal-dialog {
@@ -213,16 +222,22 @@ h4 {
     display: inline-block;
 }
 
+#updateForm input[type='radio'] {
+    display: inline-block;
+    font-size: 3em;
+    margin: 0;
+}
+
 #date {
     margin-right: 0;
 }
 
 #distance {
-    margin-right: 14px;
+    margin-right: 23px;
     width: 80px;
 }
 
 #hours, #minutes {
-    margin: 0 0 0 5px;
-    width: 60px;
+    margin: 0;
+    width: 70px;
 }
