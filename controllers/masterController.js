@@ -10,11 +10,23 @@ var race = require("../models/raceModel.js");
 var user_race = require("../models/userRaceModel.js");
 var userRace_history = require("../models/userRaceHistoryModel.js");
 
+//api for returning active race of user
+router.get("/getRaceInfo/:raceId", function(req, res){
+  race.selectAllForOne("id",req.params.raceId, function(data){
+    res.send(data);
+  });
+});
 
 //main activity route shows home page
 router.get("/:id", function(req, res) {
-    user.one(req.params.id, function(data){
-        res.render("activity", data);
+  var userId = req.params.id;
+  if(userId != 'favicon.ico') //stupid fucking favicon crap
+    user.one(userId, function(data){
+      user_race.getActiveRace(userId, function(data2){
+        race.selectAllForOne("id", data2, function(raceInfo){
+          res.render("activity", {user:data, race:data2, raceInfo:raceInfo});
+        });
+      });
     });
 });
 
