@@ -27,7 +27,34 @@ var getRace = function(){
   .done(function(results){
     if(results){
       var route = JSON.parse(results.route);
+      bounds  = new google.maps.LatLngBounds();
+
       poly.setPath(route);
+
+      //adds the start marker
+      marker = new google.maps.Marker({
+        position: route[0],
+        map: map
+      });
+
+      loc = new google.maps.LatLng(marker.position.lat(), marker.position.lng());
+      bounds.extend(loc);
+  
+      markers.push(marker);
+
+      //adds the end markers
+      marker = new google.maps.Marker({
+        position: route[route.length-1],
+        map: map
+      });
+
+      loc = new google.maps.LatLng(marker.position.lat(), marker.position.lng());
+      bounds.extend(loc);
+  
+      markers.push(marker);
+
+      map.fitBounds(bounds);
+      map.panToBounds(bounds);
     }
   });
 }

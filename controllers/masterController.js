@@ -23,7 +23,9 @@ router.get("/:id", function(req, res) {
   if(userId != 'favicon.ico') //stupid fucking favicon crap
     user.one(userId, function(data){
       user_race.getActiveRace(userId, function(data2){
-        res.render("activity", {user:data, race:data2});
+        race.selectAllForOne("id", data2, function(raceInfo){
+          res.render("activity", {user:data, race:data2, raceInfo:raceInfo});
+        });
       });
     });
 });
