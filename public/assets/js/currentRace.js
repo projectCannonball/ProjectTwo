@@ -24,6 +24,8 @@ var currentRace = function() {
                 labels : response.x,
                     datasets : [
                         {
+                            label: "Miles Per Day",
+                            borderColor: "Orange",
                             fillColor : "#ff7700",
                             strokeColor : "#ACC26D",
                             pointColor : "#fff",
@@ -32,6 +34,11 @@ var currentRace = function() {
                         }
             ]},
             options: {
+                responsive: true,
+                hover: {
+                    mode: 'nearest',
+                    intersect: true,
+                },
                 scales: {
                     yAxes: [{
                         ticks: {
