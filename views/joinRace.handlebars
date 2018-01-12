@@ -14,119 +14,43 @@
             <p>826 miles</p>
             <br>
             <div class="text-center">
-                <a href="/new/{{ID}}" id="newRace" class="btn btn-default btn-block"><span class="glyphicon glyphicon-road"></span> Start New Race</a>
-                <a href="/join/{{ID}}" id="joinRace" class="btn btn-default btn-block"><span class="glyphicon glyphicon-ok"></span> Join a Race</a>
-                <a href="/past/{{ID}}" id="pastRaces" class="btn btn-default btn-block"><span class="glyphicon glyphicon-stats"></span> Your Past Races</a>
+                <a href="/new/{{ID}}" class="btn btn-default btn-block"><span class="glyphicon glyphicon-road"></span> Start New Race</a>
+                <a href="/join/{{ID}}" class="btn btn-default btn-block"><span class="glyphicon glyphicon-ok"></span> Join a Race</a>
+                {{!-- <a href="/past/{{ID}}" class="btn btn-default btn-block"><span class="glyphicon glyphicon-stats"></span> Your Past Races</a> --}}
             </div>
         </div><!-- end leftPanel -->
 
-        <div id="raceTracker" class="col-md-7">
-            <h1>Join Race</h1>
+        <div id="raceTracker" class="col-md-10">
+
+
+
+        </div>    
+
+    </div> <!-- /end Main Content -->
+
+    <div id="joinRace" class="row">
+        <div class="col-md-3">
+            <h2>Create New Race</h2>
+            <h4>Name of Race</h4>
+            <p>The name of race</p>
+            <h4 >Creator</h4>
+            <p>First Name</p>
+        </div>
+        <div class="col-md-3 pushDown">
+            <h4 >Race Type</h4>
+            <p>Run</p>
+            <h4 >Distance</h4>
+            <p>The name of race</p>
+        </div>
+        <div class="col-md-3 pushDown">
+            <h4 >Start Date</h4>
+            <p>January 1, 2018</p>
+            <h4 >End Date</h4>
+            <p>June 1, 2018</p>
         </div>
 
-        <div id="newRace" class="col-md-3">
-
-        </div>
-    </div>
-
-    <div id="raceStats" class="row">
-        <div class="col-md-12">
-            <div class="col-md-9">
-                <h2>Current Race Name</h2>
-            </div>
-            <div id="enterStats" class="col-md-3">
-                <button type="submit" id="update" class="btn btn-md btn-danger" data-toggle="modal" data-target="#updateModal"><span class="glyphicon glyphicon-plus"></span> Update Progress</button>
-            </div>
-        </div>
-        
-        <div class="col-md-12">
-            <div class="col-md-3">
-                <h4>Total Distance Covered</h4>
-                <p>72 miles</p>
-                <h4>Session Distance Covered</h4>
-                <p>6 miles</p>
-                <h4>Total Duration</h4>
-                <p>10.8 hours</p>
-                <h4>Session Duration</h4>
-                <p>2 hours</p>                  
-            </div>
-            
-            <div class="col-md-3">
-                <h4>Average Pace</h4>
-                <p>9.1 minute mile</p>
-                <h4>Average Speed</h4>
-                <p>6.6 mph</p>
-                <h4>Current Position</h4>
-                <p>5th</p>
-            </div>
-            <div class="col-md-3">
-                <h4>Race Leaders</h4>
-                <p>J.J. McClure<br>
-                Capt. Chaos<br>
-                James Bond</p>
-        
-                <h4>Total # of Racers</h4>
-                <p>106</p>
-            </div>
-            <div class="col-md-3">
-                <h4>Race Start Date</h4>
-                <p>January 1, 1998</p>
-                <h4>Race End Date</h4>
-                <p>June 1, 1998</p>       
-                <h4>Distance Remaining</h4>
-                <p>152 miles</p>
-            </div>
+        <div id="myButtons" class="col-md-3 ">
+            <a href="#" class="btn btn-danger btn-block submit">Join</a>
+            <a href="#" class="btn btn-danger btn-block submit">Cancel</a>
         </div>
     </div>
- 
-
-
-
-
-
-
-
-
-
-
-
-    <!-- Modal -->
-    <div id="updateModal" class="modal fade" role="dialog">
-        <div class="modal-dialog">
-            <!-- Modal content-->
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h2 class="modal-title">Update Progress</h2>
-                </div>
-                <div class="modal-body">
-                    <!-- form content-->
-                    <form id="updateForm">
-                        <fieldset>
-                            <div class="form-group"> 
-                                <label for="">Date</label>
-                                <input type="date" class="form-control" id="date" name="entryDate">
-                            </div>
-                            <div class="form-group">
-                                <label for="">Distance</label>                            
-                                <input type="number" class="form-control" min="0" step="0.1" value="0.0" id="distance" name="distance">
-                            </div>
-                            <div class="form-group">
-                                <input type="radio" id="miles" name="distanceType" value="miles"> Miles <br>
-                                <input type="radio" id="kilometers" name="distanceType" value="kilometers"> Kilometers
-                            </div>
-                            <div class="form-group">                                                                 
-                                <label for="">Hours</label>
-                                <input type="number" class="form-control" id="hours" name="hours" min="1" max="99">
-                            </div>
-                            <div class="form-group"> 
-                                <label for="">Minutes</label>
-                                <input type="number" class="form-control" id="minutes" name="minutes" min="1" max="59">
-                            </div>
-                            <button type="submit" class="btn btn-danger btn-lg submit">Submit</button>
-                        </fieldset>
-                    </form> <!-- /end form -->
-                </div>
-            </div>
-        </div>
-    </div> <!-- /end updateModal -->
