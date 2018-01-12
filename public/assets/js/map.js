@@ -9,11 +9,32 @@ var arr = [];
 var directionService;
 var directionDisplay;
 var startPos = "Chicago";
-var endPos = "Schaumburg";
+
+var endPos = "New York City";
+
 var marker;
 var markers = [];
 var draw = false;
 var storedLatLng = [];
+
+
+//function to get the id's stored on the page
+var getRace = function(){
+  var raceId = $("#currRaceID").attr("value");
+
+  //api call to get race info that is on the page
+  $.ajax({
+    url: "/getRaceInfo/"+raceId,
+    method: "GET"
+  })
+  .done(function(results){
+    if(results){
+      var route = JSON.parse(results.route);
+      poly.setPath(route);
+    }
+  });
+}
+
 
 function initMap() {
   directionService = new google.maps.DirectionsService;
@@ -116,27 +137,38 @@ function initMap() {
               }
             ]
   });    
+
   poly = new google.maps.Polyline({
     strokeColor: "#ff0000",
     strokeOpacity: 1.0,
     strokeWeight: 3
   });
   poly.setMap(map);
-  calculateAndDisplayRoute(directionService, directionDisplay);
-  map.addListener('click', addLatLng);
+
+
+  //calls the function to draw the path
+  //calculateAndDisplayRoute(directionService, directionDisplay);
+
+  // Add a listener for the click event
+  //map.addListener('click', addLatLng);
 }
 
-function calculateAndDisplayRoute(directionService, directionDisplay){
+function calculateAndDisplayRoute(directionService, directionDisplay){  
   directionService.route({
-    origin: arr[0] === undefined ? startPos : arr[0],
-    destination: arr[1] === undefined ? endPos : arr[1],
-    travelMode: "DRIVING",
+    origin: {'lat':data.startLat,'lng':data.startLon},
+    destination: {'lat':data.endLat,'lng':data.endLon},
+    travelMode: data.type||'DRIVING',
   }, function(response, status){
     if(status === 'OK'){
+      console.log(response)
+      // directionDisplay.setMap(map);
+      // directionDisplay.setDirections(response);
+
       var path = poly.getPath();
       path.clear();
       storedLatLng = [];
       for(i in response.routes[0].overview_path){
+        //path.push(response.routes[0].overview_path[i]);
         storedLatLng.push({
           lat: response.routes[0].overview_path[i].lat(),
           lng: response.routes[0].overview_path[i].lng()
@@ -146,6 +178,19 @@ function calculateAndDisplayRoute(directionService, directionDisplay){
       poly.setPath(storedLatLng);
     } else {
       window.alert(`Direction request failed due to ${status}`);
+        //if(i == 1){
+         // console.log(response.routes[0].overview_path[i]);
+          
+         // console.log(response.routes[0].overview_path[i].lat());
+         // console.log(response.routes[0].overview_path[i].lng());
+        //}
+
+        // if(i == response.routes[0].overview_path.length - 1){
+        //   marker = new google.maps.Marker({
+        //     position: response.routes[0].overview_path[i],
+        //     map: map
+        //   });
+        // }
       arr = [];
     }
   });
@@ -153,26 +198,36 @@ function calculateAndDisplayRoute(directionService, directionDisplay){
 
 // Handles click events on a map, and adds a new point to the Polyline.
 function addLatLng(event) {
-	
-	//  If statement necessary for reroutes
-	if(draw && arr.length ==2) {
-		draw = !draw;
-		arr = [];
-	}
+  console.log(event.latLng)
+  //var path = poly.getPath();
+
+  // Because path is an MVCArray, we can simply append a new coordinate
+  // and it will automatically appear.
+  //path.push(event.latLng); 
+  
   if(arr.length < 2){
+    // Add a new marker at the new plotted point on the polyline.
+    
     marker = new google.maps.Marker({
       position: event.latLng,
       map: map
     });
+
     markers.push(marker);
     arr.push(event.latLng);
   }
+
   if(!draw && arr.length == 2){
     draw = true;
+
     calculateAndDisplayRoute(directionService, directionDisplay);
+    
     for(let key in markers) {
       markers[key].setMap(null);
     }
     markers = [];
   }
+  console.log(marker)
 }
+
+$(document).ready(getRace());

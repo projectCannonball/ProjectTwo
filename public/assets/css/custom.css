@@ -156,36 +156,40 @@ h4 {
 }
 
 #wrapper {
-    background-color: white;
-    min-height: calc(100vh -82px - 20px);
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    min-height:calc(100vh - 82px - 20px);
 }
 
 #wrapper p {
     font-size: 1.2em;
 }
 
-#wrapper .modal h2 {
-    color: #555;
-}
+/* #displayStats {
+    padding: 0;
+} */
 
 #leftPanel {
     background-color: black;
     color: lightgrey;
+    height: 525px;
     margin: 0;
-    padding: 0 20px 24px 40px; 
+    padding-left: 40px; 
 }
 
 #leftPanel h4 {
-    color: #6a6a6a;
+    color: #6a6a6a
 }
 
 #raceTracker {
-
     background: lightgrey;
     min-height: 425px;
     padding: 0;
 }
 
+/* Always set the map height explicitly to define the size of the div
+         * element that contains the map. */
 #map {
     position:relative;
     height:425px;
@@ -193,16 +197,16 @@ h4 {
 }
 
 #barChart {
-    background-color: darkgray;
-    min-height: 425px;
+    background: black;
+    box-shadow: 0 3px 10px #404040;        
+    height: 325px;
 }
 
 #raceStats {
-    background-color: white;
     color: #888;
-    margin-bottom: 40px;
-    padding: 0 10px;
-
+    height: 200px;
+    margin: 0;
+    padding: 0;
 }
 
 #raceStats h2 {
@@ -217,13 +221,6 @@ h4 {
 #update {
     margin-top: 15px;
 }
-
-footer {
-    padding: 0 20px;
-}
-
-
-/*** ALL MODALS ***/
 
 #updateModal .modal-dialog {
     width: 265px;
@@ -245,11 +242,10 @@ footer {
 
 #distance {
     margin-right: 23px;
-    width: 100px;
+    width: 80px;
 }
 
 #hours, #minutes {
     margin: 0;
     width: 70px;
 }
-
