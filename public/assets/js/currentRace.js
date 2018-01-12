@@ -35,10 +35,10 @@ var currentRace = function() {
             ]},
             options: {
                 responsive: true,
-                hover: {
-                    mode: 'nearest',
-                    intersect: true,
-                },
+                // hover: {
+                //     mode: 'nearest',
+                //     intersect: true,
+                // },
                 scales: {
                     yAxes: [{
                         ticks: {
