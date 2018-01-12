@@ -18,6 +18,12 @@ var race = {
 		orm.updateOne("races", objColVals, condition, (res) => {
 			cb(res);
 		});
+	},
+	//gets all info for Single Entry
+	selectAllForOne: function(conCol, cond, cb) {
+		orm.selectOne("races", conCol, cond, function(res){
+			cb(res);
+		});
 	}
 };
 
