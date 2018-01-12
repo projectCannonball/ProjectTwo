@@ -1,0 +1,80 @@
+    <div id="main" class="row">
+        <div id="leftPanel" class="col-md-2">
+            <h2>DASHBOARD</h2>
+            <p>{{firstName}} {{lastName}}<br>
+            {{city}}, {{state}}</p>
+            
+            <h4>Total Races</h4>
+            <p>10</p>
+            
+            <h4>1st Place Wins</h4>
+            <p>2</p>
+            
+            <h4>Total Distance</h4>
+            <p>826 miles</p>
+            <br>
+            <div class="text-center">
+                <a href="/new/{{ID}}" class="btn btn-default btn-block"><span class="glyphicon glyphicon-road"></span> Start New Race</a>
+                <a href="/join/{{ID}}" class="btn btn-default btn-block"><span class="glyphicon glyphicon-ok"></span> Join a Race</a>
+                {{!-- <a href="/past/{{ID}}" class="btn btn-default btn-block"><span class="glyphicon glyphicon-stats"></span> Your Past Races</a> --}}
+            </div>
+        </div><!-- end leftPanel -->
+
+        <div id="raceTracker" class="col-md-10">
+
+
+
+        </div>    
+
+    </div> <!-- /end Main Content -->
+
+    <div id="newRace" class="row">
+        <div class="col-md-5">
+            <h2>Create New Race</h2>
+            <!-- form content-->
+            <form>
+                <fieldset>
+                    <div class="form-group"> 
+                        <label for="">Race Name</label>
+                        <input type="text" class="form-control" id="raceName" name="raceName" size="28">
+                    </div>
+                    <div id="raceType" class="form-group"> 
+                        <label for="">Race Type</label>
+                        <select class="form-control" id="raceName" name="raceName">
+                            <option value="volvo">Run</option>
+                            <option value="saab">Bike</option>
+                            <option value="fiat">Walk</option>
+                            <option value="audi">Audi</option>
+                        </select>
+                    </div>
+                    <br>
+                    <div class="form-group">
+                        <label for="">Start Location</label>
+                        <input type="text" class="form-control" id="startLocation" name="startLcation" size="15">
+                    </div>
+                    <div class="form-group"> 
+                        <label for="">End Location</label>
+                        <input type="text" class="form-control" id="endLocation" name="endLocation" size="15">
+                    </div>
+
+                    <div class="form-group"> 
+                        <label for="">Start Date</label>
+                        <input type="date" class="form-control" id="startDate" name="startDate">
+                    </div>
+                    <div class="form-group"> 
+                        <label for="">End Date</label>
+                        <input type="date" class="form-control" id="endDate" name="endDate">
+                    </div>
+                </fieldset>
+            </form> <!-- /end form -->
+        </div>
+        <div id="raceDesc" class="col-md-4">
+                <label for="">Race Description</label><br>
+                <textarea id="textbox" rows="6" name="raceDesc"></textarea>
+        </div>
+        <div id="myButtons" class="col-md-3 ">
+            <a href="#" class="btn btn-danger btn-block submit">Map Race</a>
+            <a href="#" class="btn btn-danger btn-block submit">Create Race</a>
+            <a href="#" class="btn btn-danger btn-block submit">Cancel</a>
+        </div>
+    </div>
