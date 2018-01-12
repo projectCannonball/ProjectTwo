@@ -156,52 +156,58 @@ h4 {
 }
 
 #wrapper {
-    background-color: white;
-    min-height: calc(100vh -82px - 20px);
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    min-height:calc(100vh - 82px - 20px);
 }
 
 #wrapper p {
     font-size: 1.2em;
 }
 
-#wrapper .modal h2 {
-    color: #555;
-}
+/* #displayStats {
+    padding: 0;
+} */
 
 #leftPanel {
     background-color: black;
     color: lightgrey;
+    height: 525px;
     margin: 0;
-    padding: 0 20px 24px 40px; 
+    padding-left: 40px; 
 }
 
 #leftPanel h4 {
-    color: #6a6a6a;
+    color: #6a6a6a
 }
 
 #raceTracker {
     background: lightgrey;
-    min-height: 425px;
+    min-height: 387px;
     padding: 0;
 }
 
+/* Always set the map height explicitly to define the size of the div
+         * element that contains the map. */
 #map {
-    position:relative;
+    position: absolute;
+    top: 0;
+    left: 0;
     height:100%;
     width:100%;
 }
 
 #barChart {
     background-color: darkgray;
-    min-height: 425px;
+    min-height: 387px;
 }
 
 #raceStats {
-    background-color: white;
     color: #888;
-    margin-bottom: 40px;
-    padding: 0 10px;
-
+    height: 200px;
+    margin: 0;
+    padding: 0;
 }
 
 #raceStats h2 {
@@ -213,6 +219,10 @@ h4 {
     color: #CD5C5C;
 }
 
+/* #raceStats span {
+    color: #CD5C5C;
+} */
+
 #update {
     margin-top: 15px;
 }
@@ -222,8 +232,61 @@ footer {
 }
 
 
-/*** ALL MODALS ***/
+/*** NEW RACE PAGE PAGE ***/
 
+#newRace h2 {
+    color: #CD5C5C;    
+}
+
+#newRace {
+    margin: 0 10px;
+}
+
+#raceDesc {
+    margin: 54px 0 0 0;
+    padding: 0;
+}
+
+#raceDesc {
+    height: 100px;
+}
+
+#textbox {
+    font-size: 1.75em;
+    padding: 0 10px 6px 10px;
+    width: 100%;
+}
+
+#myButtons {
+    margin-top: 80px;
+}
+
+/*** JOIN RACE PAGE ***/
+#joinRace h2 {
+    color: #CD5C5C;    
+}
+
+#joinRace h4 {
+    color: #CD5C5C;    
+}
+
+#joinRace {
+    margin: 0 10px;
+}
+
+
+#joinRace #myButtons {
+    margin-top: 55px;
+}
+
+.pushDown {
+    margin-top: 43px;
+}
+
+
+/********* ALL MODALS *********/
+
+/*** UPDATE MODAL ***/
 #updateModal .modal-dialog {
     width: 265px;
 }
@@ -244,13 +307,15 @@ footer {
 
 #distance {
     margin-right: 23px;
-    width: 100px;
+    width: 80px;
 }
 
 #hours, #minutes {
     margin: 0;
     width: 70px;
 }
+
+
 
 /** NEW RACE MODAL **/
 #newRaceModal #raceName {

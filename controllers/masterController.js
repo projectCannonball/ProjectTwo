@@ -10,18 +10,44 @@ var race = require("../models/raceModel.js");
 var user_race = require("../models/userRaceModel.js");
 var userRace_history = require("../models/userRaceHistoryModel.js");
 
+//api for returning active race of user
+router.get("/getRaceInfo/:raceId", function(req, res){
+  race.selectAllForOne("id",req.params.raceId, function(data){
+    res.send(data);
+  });
+});
 
 //main activity route shows home page
 router.get("/:id", function(req, res) {
-    user.one(req.params.id, function(data){
-        res.render("activity", data);
+  var userId = req.params.id;
+  if(userId != 'favicon.ico') //stupid fucking favicon crap
+    user.one(userId, function(data){
+      user_race.getActiveRace(userId, function(data2){
+        race.selectAllForOne("id", data2, function(raceInfo){
+          res.render("activity", {user:data, race:data2, raceInfo:raceInfo});
+        });
+      });
     });
 });
 
-router.get("/:userid/:raceid", function(req, res){
+router.get("/chart/:userid/:raceid", function(req, res){
   userRace_history.chartSelectedInfo(["user_id", "race_id"], [req.params.userid, req.params.raceid], function(data){
     res.send(data);
   })
+});
+
+router.get("/new/:id", function(req, res){
+  user.one(req.params.id, function(data){
+    res.render("newRace", data);
+  });
+});
+
+router.get("/join/:id", function(req, res){
+  res.render("joinRace");
+});
+
+router.get("/past/:id", function(req, res){
+  res.render("pastRaces");
 });
 
 //main index route shows home page
@@ -61,8 +87,6 @@ router.post("/activity", function(req, res){
       res.render("index", {error:true});
   });
 });
-
-
 
 // Export routes for server.js to use.
 module.exports = router;

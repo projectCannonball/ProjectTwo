@@ -7,7 +7,7 @@ var currentRace = function() {
     console.log("http://localhost:3000/"+userid+"/"+raceid);
 
     $.ajax({
-        url: "http://localhost:3000/"+userid+"/"+raceid,
+        url: "http://localhost:3000/chart/"+userid+"/"+raceid,
         method: "GET" 
     }).done(function(response) {
     
