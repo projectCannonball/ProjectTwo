@@ -55,5 +55,6 @@ CREATE TABLE userRace_history (
     time BIGINT NOT NULL,
     create_ts TIMESTAMP NOT NULL DEFAULT current_timestamp,
     foreign key urh_user_id_fk (user_id) references users(id) ON UPDATE CASCADE ON DELETE RESTRICT,
-    foreign key urh_race_id_fk (race_id) references races(id) ON UPDATE CASCADE ON DELETE RESTRICT    
+    foreign key urh_race_id_fk (race_id) references races(id) ON UPDATE CASCADE ON DELETE RESTRICT,
+    constraint entryUnique UNIQUE(user_id, race_id, activityDt)   
 );
