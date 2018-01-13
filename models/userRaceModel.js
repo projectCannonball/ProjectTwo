@@ -17,9 +17,18 @@ var user_race = {
     },
     // The variables cols and vals are arrays.
     //insertOne()
-    insert: function(cols, vals, cb) {
-        orm.insertOne("USER_RACE", cols, vals, function(res) {
-            cb(res.insertId);
+    insert: function(userId, raceId, cb) {
+        pool.getConnection().then(function(connection){
+            connection.query("INSERT INTO user_race (user_id, race_id, status, entryDate) VALUES (?,?, 'active', NOW())", [userId,raceId], function(error, results){
+                if(error) throw error;
+
+                var id = null;
+                if(results[0])
+                    id = results[0].race_id;
+                pool.closeConnection(connection);
+
+                cb(id);
+            });
         });
     },
     //updateOne()
@@ -31,19 +40,16 @@ var user_race = {
     //get most recent active race
     getActiveRace: function(userId, cb){
         pool.getConnection().then(function(connection){
-            var q = connection.query("SELECT MAX(race_id) as race_id FROM USER_RACE WHERE status = 'active' AND user_id = ?", [userId], function(error, results){
+            connection.query("SELECT MAX(race_id) as race_id FROM USER_RACE WHERE status = 'active' AND user_id = ?", [userId], function(error, results){
                 if(error) throw error;
 
                 var id = null;
                 if(results[0])
                     id = results[0].race_id;
-                console.log("userRace result: "+results)
-                console.log("userRace result: "+JSON.stringify(results[0]))
                 pool.closeConnection(connection);
 
                 cb(id);
             });
-            console.log(q.sql)
         });
     },
     //get the number of races a user has/is in

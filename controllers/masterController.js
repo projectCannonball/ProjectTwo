@@ -196,6 +196,14 @@ router.post("/createNewRace/:userId", function(req, res){
   });
 });
 
+//creates the race in the database
+router.post("/joinRace/:userId/:raceId", function(req, res){
+  user_race.insert(
+    req.params.userId, req.params.raceId,function(id){
+    res.redirect("/"+req.params.userId);
+  });
+});
+
 //main route to the activity page for sign in
 router.post("/activity", function(req, res){
   user.login("userName", req.body.userName, "password", req.body.password,

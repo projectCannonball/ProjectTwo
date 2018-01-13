@@ -51,7 +51,7 @@
         </div>
 
         <div id="myButtons" class="col-md-3 ">
-            <form action="/joinRace/{{user.ID}}" method="POST">
+            <form action="/joinRace/{{user.ID}}/{{raceInfo.ID}}" method="POST">
                 <button type="submit" class="btn btn-danger btn-block submit">Join</button>
             </form>
             <a href="/{{user.ID}}" class="btn btn-danger btn-block submit">Cancel</a>
