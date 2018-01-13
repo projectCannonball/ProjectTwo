@@ -17,7 +17,7 @@
             <p>{{extraInfo.placeFirst}}</p>
             
             <h4>Total Distance</h4>
-            <p>{{extraInfo.totDistance}}</p>
+            <p>{{extraInfo.totDistance}} miles</p>
             <br>
             <div class="text-center">
                 <a href="/new/{{user.ID}}" class="btn btn-default btn-block"><span class="glyphicon glyphicon-road"></span> Start New Race</a>
@@ -53,9 +53,11 @@
                 <h4>Total Duration</h4>
                 <p>{{extraInfo.totTime}} hours</p>
                 <h4>Latest Activity Distance</h4>
-                <p>6 miles</p>
+                <p>{{extraInfo.latestDist}} miles</p>
                 <h4>Latest Activity Duration</h4>
-                <p>2 hours</p>                  
+                <p>{{extraInfo.latestTime}} hours</p>
+                <h4>Latest Activity Date</h4>
+                <p>{{extraInfo.latestDt}}</p>
             </div>
             
             <div class="col-md-3">
@@ -97,7 +99,7 @@
                 </div>
                 <div class="modal-body">
                     <!-- form content-->
-                    <form id="updateForm">
+                    <form id="updateForm" action="/progress/{{user.ID}}/{{race}}" method="POST">
                         <fieldset>
                             <div class="form-group"> 
                                 <label for="">Date</label>

@@ -1,5 +1,6 @@
 //imports the npm package
 var express = require("express");
+var dateFormat = require('dateformat');
 
 //creates the router controller from the express servers
 var router = express.Router();
@@ -24,10 +25,13 @@ router.get("/:id", function(req, res) {
     user.one(userId, function(data){
       user_race.getActiveRace(userId, function(data2){
         race.selectAllForOne("id", data2, function(raceInfo){
-          var raceId 
-          if(raceInfo)
+          var raceId = null;
+          if(raceInfo){
             raceId = raceInfo.ID;
-            user_race.getNumOfRaces(userId, function(numRaces){
+            raceInfo.startDate = dateFormat(raceInfo.startDate, "mmmm dS, yyyy") || 'N/A';
+            raceInfo.endDate = dateFormat(raceInfo.endDate, "mmmm dS, yyyy") || 'N/A';
+          }
+          user_race.getNumOfRaces(userId, function(numRaces){
             var extraInfo = {};
 
             extraInfo.numRaces = numRaces.count || 0;
@@ -44,7 +48,21 @@ router.get("/:id", function(req, res) {
                   extraInfo.distRemaining = (sumStats.distRemaining/1609.34).toFixed(2) || 0;
                   extraInfo.avgSpeed = (sumStats.avgSpeed/0.44704).toFixed(2) || 0;
                   extraInfo.avgPace = (sumStats.avgPace/0.0372823).toFixed(2) || 0;
-                  res.render("activity", {user:data, race:data2, raceInfo:raceInfo,extraInfo});
+
+                  userRace_history.getSelectedActivity(userId, raceId, function(recentActivity){
+                    if(recentActivity){
+                      extraInfo.latestDist = (recentActivity.distance/1609.34).toFixed(2);
+                      extraInfo.latestTime = (recentActivity.time/60/60).toFixed(2);
+                      extraInfo.latestDt = dateFormat(recentActivity.activityDt, "mmmm dS, yyyy");
+                    }
+                    else{
+                      extraInfo.latestDist = 0;
+                      extraInfo.latestTime = 0;
+                      extraInfo.latestDt = 'N/A';
+                    }
+
+                    res.render("activity", {user:data, race:data2, raceInfo:raceInfo, extraInfo});
+                  });
                 });
               });
             });
@@ -85,6 +103,29 @@ router.put("/:id", function(req, res) {
     devoured: true
   }, req.params.id, function() {
     res.redirect("/");
+  });
+});
+
+//main post route that creates the new user
+router.post("/progress/:userId/:raceId", function(req, res) {
+  var time = null;
+  var distance = null;
+
+  //converts the distance to meters
+  if(req.body.distanceType === 'miles')
+    distance =req.body.distance*1609.34;
+  else
+    distance =req.body.distance*1000;
+
+  //converts the integers to seconds
+  time = parseInt(req.body.hours*60*60) + parseInt(req.body.minutes*60);
+
+  userRace_history.insert([
+    "user_id", "race_id", "distance", "time", "activityDt"
+  ], [
+    req.params.userId, req.params.raceId, distance, time, req.body.entryDate
+  ], function(id) {
+    res.redirect("/"+req.params.userId);
   });
 });
 
