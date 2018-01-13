@@ -353,3 +353,14 @@ footer {
 #newRaceModal #raceName {
     width: 312px;
 }
+
+/*List of Race*/
+.ListOfRaces label {
+    margin-right: 10px;
+}
+
+.listOfRaceRight {
+    float: right;
+    display: inline-block;
+    margin: 0px;
+}

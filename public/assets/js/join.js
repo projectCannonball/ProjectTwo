@@ -1,13 +1,13 @@
 $("#joinBtn").on("click", function(){
     $.ajax({
-        url: "/getRaceList/"+$("#currRaceID").attr("value"),
+        url: "/getRaceList/"+$("#currUserID").attr("value"),
         method:"GET"
     }).done(function(data){
         $("#raceList").empty();
         for(i in data){
-            $("#raceList").append('<div class="form-group"><label><a href="/join/'+$("#currUserID").attr("value")+'/'+data[i].ID+'">'+data[i].raceName+
-            '</a></label><label>'+data[i].startDate+'</label><label>'+data[i].endDate+'</label><label>'+data[i].distance+' miles</label></div>');
+            console.log(data[i].distance)
+            $("#raceList").append('<div class="listOfRaces"><label><a href="/join/'+$("#currUserID").attr("value")+'/'+data[i].ID+'">'+data[i].raceName+
+            '</a></label><br><label>Start: '+data[i].startDate+'</label><label class="listOfRaceRight">End: '+data[i].endDate+'</label><br><label>'+data[i].distance+' miles</label></div><hr>');
         }
     });
-    
 });

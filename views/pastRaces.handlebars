@@ -4,7 +4,7 @@
             <div id="currUserID" value={{user.ID}} hidden></div>
             <div id="currRaceID" value={{race}} hidden></div>
             <!-- back to the HTML -->
-            
+
             <h2>DASHBOARD</h2>
             <p>{{user.firstName}} {{user.lastName}}<br>
             {{user.city}}, {{user.state}}</p>
@@ -19,7 +19,7 @@
             <p>826 miles</p>
             <br>
             <div class="text-center">
-                <a href="/new/{{user.ID}}/{{race}}" id="newRace" class="btn btn-default btn-block"><span class="glyphicon glyphicon-road"></span> Start New Race</a>
+                <a href="/new/{{user.ID}}" id="newRace" class="btn btn-default btn-block"><span class="glyphicon glyphicon-road"></span> Start New Race</a>
                 <a href="" id="joinBtn" id="joinRace" class="btn btn-default btn-block" data-toggle="modal" data-target="#joinRace"><span class="glyphicon glyphicon-ok"></span> Join a Race</a>
                 <a href="/past/{{user.ID}}" id="pastRaces" class="btn btn-default btn-block"><span class="glyphicon glyphicon-stats"></span> Your Past Races</a>
             </div>

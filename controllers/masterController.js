@@ -78,7 +78,7 @@ router.get("/chart/:userid/:raceid", function(req, res){
   })
 });
 
-router.get("/new/:id/:raceId", function(req, res){
+router.get("/new/:id", function(req, res){
   var userId = req.params.id;
   user.one(userId, function(data){
     user_race.getNumOfRaces(userId, function(numRaces){
@@ -114,7 +114,16 @@ router.get("/join/:userId/:raceId", function(req, res){
         userRace_history.getTotalDistance(userId, function(dist){
           extraInfo.totDistance = (dist.sum/1609.34).toFixed(2) || 0;
 
-          res.render("joinRace", {user:data, extraInfo});
+          race.selectAllForOne("id", raceId, function(raceInfo){
+            var creatorId = raceInfo.creator_id;
+            raceInfo.distance = (raceInfo.distance/1609.34).toFixed(2) || 0;
+            raceInfo.startDate = dateFormat(raceInfo.startDate, "mmmm dS, yyyy") || 'N/A';
+            raceInfo.endDate = dateFormat(raceInfo.endDate, "mmmm dS, yyyy") || 'N/A';
+            raceInfo.type = raceInfo.type || 'N/A';
+            user.one(creatorId, function(creatorInfo){
+              res.render("joinRace", {user:data, extraInfo, raceInfo:raceInfo, creatorInfo:creatorInfo});
+            });
+          });
         });
       });
     });
@@ -126,7 +135,7 @@ router.get("/getRaceList/:id", function(req, res){
     for(i in data){
       data[i].startDate = dateFormat(data[i].startDate, "mmmm dS, yyyy");
       data[i].endDate = dateFormat(data[i].endDate, "mmmm dS, yyyy");
-      data[i].distance = (data[i].distance/1609.34).toFixed(2);
+      data[i].distance = (data[i].distance/1609.34).toFixed(2) || 0;
     }
     res.send(data);
   });
@@ -173,16 +182,17 @@ router.post("/progress/:userId/:raceId", function(req, res) {
   });
 });
 
-//main post route that creates the new user
-router.post("/", function(req, res) {
-  user.insert([
-    "userName", "firstName", "lastName", "password",
-    "city", "state", "email"
-  ], [
-    req.body.userName, req.body.firstName, req.body.lastName, req.body.password,
-    req.body.city, req.body.state, req.body.email
-  ], function(id) {
-    res.redirect("/"+id);
+//creates the race in the database
+router.post("/createNewRace/:userId", function(req, res){
+  race.insertOne([
+    "raceName", "raceDesc", "startDate", "endDate",
+    "startLoc", "endLoc", "type", "route", "distance"
+  ],
+  [
+    req.body.raceName, req.body.raceDesc, req.body.startDate, req.body.endDate,
+    req.body.startLoc, req.body.endLoc, req.body.type, req.body.route, req.body.distance
+  ],function(id){
+    res.send("/"+req.params.userId);
   });
 });
 
@@ -194,6 +204,19 @@ router.post("/activity", function(req, res){
       res.redirect("/"+id);
     else
       res.render("index", {error:true});
+  });
+});
+
+//main post route that creates the new user
+router.post("/", function(req, res) {
+  user.insert([
+    "userName", "firstName", "lastName", "password",
+    "city", "state", "email"
+  ], [
+    req.body.userName, req.body.firstName, req.body.lastName, req.body.password,
+    req.body.city, req.body.state, req.body.email
+  ], function(id) {
+    res.redirect("/"+id);
   });
 });
 

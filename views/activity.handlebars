@@ -20,7 +20,7 @@
             <p>{{extraInfo.totDistance}} miles</p>
             <br>
             <div class="text-center">
-                <a href="/new/{{user.ID}}/{{race}}" class="btn btn-default btn-block"><span class="glyphicon glyphicon-road"></span> Start New Race</a>
+                <a href="/new/{{user.ID}}" class="btn btn-default btn-block"><span class="glyphicon glyphicon-road"></span> Start New Race</a>
                 <a href="" id="joinBtn" class="btn btn-default btn-block" data-toggle="modal" data-target="#joinRaceModal"><span class="glyphicon glyphicon-ok"></span> Join a Race</a>
                 {{!-- <a href="/past/{{ID}}" class="btn btn-default btn-block"><span class="glyphicon glyphicon-stats"></span> Your Past Races</a> --}}
             </div>
@@ -49,7 +49,7 @@
         <div class="col-md-12">
             <div class="col-md-3">
                 <h4>Total Distance Covered</h4>
-                <p>{{extraInfo.totDistance}} miles</p>
+                <p><span id="totalDistance">{{extraInfo.totDistance}}</span> miles</p>
                 <h4>Total Duration</h4>
                 <p>{{extraInfo.totTime}} hours</p>
                 <h4>Latest Activity Distance</h4>
