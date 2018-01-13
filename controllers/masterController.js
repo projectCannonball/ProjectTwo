@@ -119,12 +119,7 @@ router.post("/progress/:userId/:raceId", function(req, res) {
 
   //converts the integers to seconds
   time = parseInt(req.body.hours*60*60) + parseInt(req.body.minutes*60);
-  
-  
-  console.log(time)
-  
-  console.log(req.body.hours)
-  console.log(req.body.minutes)
+
   userRace_history.insert([
     "user_id", "race_id", "distance", "time", "activityDt"
   ], [
