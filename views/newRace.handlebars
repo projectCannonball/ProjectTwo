@@ -1,8 +1,8 @@
     <div id="main" class="row">
         <div id="leftPanel" class="col-md-2">
             <h2>DASHBOARD</h2>
-            <p>{{firstName}} {{lastName}}<br>
-            {{city}}, {{state}}</p>
+            <p>{{user.firstName}} {{user.lastName}}<br>
+            {{user.city}}, {{user.state}}</p>
             
             <h4>Total Races</h4>
             <p>10</p>
@@ -21,8 +21,7 @@
         </div><!-- end leftPanel -->
 
         <div id="raceTracker" class="col-md-10">
-            <div id="map"></div>
-            </div>
+            <div id='map'></div>
         </div>   
 `
     </div> <!-- /end Main Content -->
@@ -48,7 +47,7 @@
                     <br>
                     <div class="form-group">
                         <label for="">Start Location</label>
-                        <input type="text" class="form-control" id="startLocation" name="startLcation" size="15">
+                        <input type="text" class="form-control" id="startLocation" name="startLocation" size="15">
                     </div>
                     <div class="form-group"> 
                         <label for="">End Location</label>

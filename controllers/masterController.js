@@ -107,6 +107,16 @@ router.put("/:id", function(req, res) {
     res.redirect("/");
   });
 });
+ //main post route that creates the new user
+router.post("/progress/:userId/:raceId", function(req, res) {
+  user.insert([
+    "user_id","race_id","distance","time","activityDt"
+  ], [
+    req.params.userId, req.params.raceId, req.body.distance,
+  ], function(id) {
+    res.redirect("/"+id);
+  });
+});
 
 //main post route that creates the new user
 router.post("/", function(req, res) {
@@ -131,6 +141,8 @@ router.post("/activity", function(req, res){
       res.render("index", {error:true});
   });
 });
+
+router.post("/id/race_id")
 
 // Export routes for server.js to use.
 module.exports = router;

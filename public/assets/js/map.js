@@ -17,6 +17,9 @@ var storedLatLng = [];
 
 //function to get the id's stored on the page
 var getRace = function(){
+  
+
+
   var raceId = $("#currRaceID").attr("value");
 
   //api call to get race info that is on the page
@@ -43,6 +46,8 @@ var getRace = function(){
       markers.push(marker);
 
       //adds the end markers
+
+
       marker = new google.maps.Marker({
         position: route[route.length-1],
         map: map
@@ -58,6 +63,8 @@ var getRace = function(){
     }
   });
 }
+
+
 
 function initMap() {
   directionService = new google.maps.DirectionsService;
@@ -168,6 +175,19 @@ function initMap() {
   });
   poly.setMap(map);
 
+
+  console.log(`Pathname: ${window.location.pathname}`);
+  if(window.location.pathname.indexOf("/new/")>-1){
+    //calls the function to draw the path
+    
+
+    // Add a listener for the click event
+
+    $("#createRace").on("click", function() {
+      map.addListener('click', addLatLng);  
+    }).then(calculateAndDisplayRoute(directionService, directionDisplay));   
+
+  }
   //calls the function to draw the path
   //calculateAndDisplayRoute(directionService, directionDisplay);
 
@@ -177,9 +197,9 @@ function initMap() {
 
 function calculateAndDisplayRoute(directionService, directionDisplay){  
   directionService.route({
-    origin: {'lat':data.startLat,'lng':data.startLon},
-    destination: {'lat':data.endLat,'lng':data.endLon},
-    travelMode: data.type||'DRIVING',
+    origin: arr[0], //{'lat':data.startLat,'lng':data.startLon},
+    destination: arr[1], //{'lat':data.endLat,'lng':data.endLon},
+    travelMode: 'DRIVING', //data.type||
   }, function(response, status){
     if(status === 'OK'){
       console.log(response)
@@ -253,5 +273,7 @@ function addLatLng(event) {
   }
   console.log(marker)
 }
+
+
 
 $(document).ready(getRace());
