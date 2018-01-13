@@ -1,5 +1,6 @@
 // Import the ORM to create functions that will interact with the database.
 var orm = require("../config/orm.js");
+var pool = require("../config/connection.js");
 
 var userRace_history = {
     //selectAll() 
@@ -35,6 +36,20 @@ var userRace_history = {
     getTotalDistance: function(userId, cb){
         orm.sumCol("USERRACE_HISTORY", "distance", "user_id", userId, function(result){
             cb(result);
+        });
+    },
+    //get sum stats of selected race for a given user
+    getSumStatsOfRaceUser: function(userId, raceId, cb){
+        pool.getConnection().then(function(connection){
+            connection.query("SELECT sum(urh.distance) as totDistance, sum(urh.time) as totTime, r.distance- sum(urh.distance) as distRemaining, "+
+            "sum(urh.distance)/sum(urh.time) as avgSpeed, sum(urh.time)/sum(urh.distance) as avgPace "+
+            "FROM userRace_History urh INNER JOIN races r ON urh.race_id = r.id WHERE user_id = ? AND race_id = ?;", [userId, raceId], function(error, results){
+                if(error) throw error;
+
+                pool.closeConnection(connection);
+
+                cb(results[0]);
+            });
         });
     }
 };

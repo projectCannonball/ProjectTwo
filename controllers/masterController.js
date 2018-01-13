@@ -20,22 +20,30 @@ router.get("/getRaceInfo/:raceId", function(req, res){
 //main activity route shows home page
 router.get("/:id", function(req, res) {
   var userId = req.params.id;
-  if(userId != 'favicon.ico') //stupid fucking favicon crap
+  if(req.params.id != 'favicon.ico')
     user.one(userId, function(data){
       user_race.getActiveRace(userId, function(data2){
         race.selectAllForOne("id", data2, function(raceInfo){
+          var raceId = raceInfo.ID;
           user_race.getNumOfRaces(userId, function(numRaces){
             var extraInfo = {};
 
-            extraInfo.numRaces = numRaces.count;
+            extraInfo.numRaces = numRaces.count || 0;
             
             user_race.getNumOf1st(userId, function(numOf1st){
-              extraInfo.placeFirst = numOf1st.count;
+              extraInfo.placeFirst = numOf1st.count || 0;
 
               userRace_history.getTotalDistance(userId, function(dist){
                 extraInfo.totDistance = dist.sum || 0;
 
-                res.render("activity", {user:data, race:data2, raceInfo:raceInfo,extraInfo});
+                userRace_history.getSumStatsOfRaceUser(userId, raceId, function(sumStats){
+                  extraInfo.totDistance = (sumStats.totDistance/1609.34).toFixed(2) || 0;
+                  extraInfo.totTime = (sumStats.totTime/60/60).toFixed(2) || 0;
+                  extraInfo.distRemaining = (sumStats.distRemaining/1609.34).toFixed(2) || 0;
+                  extraInfo.avgSpeed = (sumStats.avgSpeed/0.44704).toFixed(2) || 0;
+                  extraInfo.avgPace = (sumStats.avgPace/0.0372823).toFixed(2) || 0;
+                  res.render("activity", {user:data, race:data2, raceInfo:raceInfo,extraInfo});
+                });
               });
             });
           });
