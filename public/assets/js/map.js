@@ -4,7 +4,6 @@
 
 var poly;
 var map;
-
 var directionService;
 var directionDisplay;
 var marker;
@@ -13,6 +12,30 @@ var draw = false;
 var storedLatLng = [];
 var latLon = [];
 var distance = null;
+
+
+//The prototype from Gisgraphy:
+GetPointAtDistance = function(metres) {
+  // some awkward special cases
+  if (metres == 0) return poly.getPath().getAt(0);
+  if (metres < 0) return null;
+  if (poly.getPath().getLength() < 2) return null;
+  var dist=0;
+  var olddist=0;
+  for (var i=1; (i < poly.getPath().getLength() && dist < metres); i++) {
+  olddist = dist;
+  dist += google.maps.geometry.spherical.computeDistanceBetween (
+    poly.getPath().getAt(i),
+    poly.getPath().getAt(i-1)
+  );
+  }
+  if (dist < metres) return null;
+  var p1= poly.getPath().getAt(i-2);
+  var p2= poly.getPath().getAt(i-1);
+  var m = (metres-olddist)/(dist-olddist);
+  return new google.maps.LatLng( p1.lat() + (p2.lat()-p1.lat())*m, p1.lng() + (p2.lng()-p1.lng())*m);
+}
+
 
 //function to get the id's stored on the page
 var getRace = function(){
@@ -28,6 +51,7 @@ var getRace = function(){
       var route = JSON.parse(results.route);
       bounds  = new google.maps.LatLngBounds();
 
+      //sets the route to be drawn for the race
       poly.setPath(route);
 
       //adds the start marker
@@ -36,6 +60,7 @@ var getRace = function(){
         map: map
       });
 
+      
       loc = new google.maps.LatLng(marker.position.lat(), marker.position.lng());
       bounds.extend(loc);
   
@@ -54,10 +79,20 @@ var getRace = function(){
 
       map.fitBounds(bounds);
       map.panToBounds(bounds);
+
+      //gets a lat,lng of where the person is at on the path
+      var latlng = GetPointAtDistance(parseFloat($("#totalDistance").html())*1609.34);
+
+      //adds the end markers
+      marker = new google.maps.Marker({
+        position: latlng,
+        map: map
+      });
     }
   });
 }
 
+//draws the Google maps
 function initMap() {
   directionService = new google.maps.DirectionsService;
   directionDisplay = new google.maps.DirectionsRenderer;
@@ -160,6 +195,7 @@ function initMap() {
             ]
   });    
 
+  //draws a polyline
   poly = new google.maps.Polyline({
     strokeColor: "#ff0000",
     strokeOpacity: 1.0,
@@ -172,6 +208,7 @@ function initMap() {
     map.addListener('click', addLatLng);
 }
 
+//function to run for the direction features of Google maps
 function calculateAndDisplayRoute(directionService, directionDisplay){
   var start = null;
   var end = null;
@@ -257,7 +294,6 @@ $(document).ready(function(){
     if(window.location.pathname.indexOf("/new/") == -1)
       getRace();
 
-
     $("#mapRace").on("click", function(){
       calculateAndDisplayRoute(directionService, directionDisplay);
     });
@@ -305,6 +341,7 @@ function createRace(){
   };
 }
 
+//sends the create race info to the api
 function sendRaceInfo(start, end){
   var info = {
     raceName: $("input[name=raceName").val(),
