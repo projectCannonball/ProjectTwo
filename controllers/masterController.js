@@ -114,7 +114,16 @@ router.get("/join/:userId/:raceId", function(req, res){
         userRace_history.getTotalDistance(userId, function(dist){
           extraInfo.totDistance = (dist.sum/1609.34).toFixed(2) || 0;
 
-          res.render("joinRace", {user:data, extraInfo});
+          race.selectAllForOne("id", raceId, function(raceInfo){
+            var creatorId = raceInfo.creator_id;
+            raceInfo.distance = (raceInfo.distance/1609.34).toFixed(2) || 0;
+            raceInfo.startDate = dateFormat(raceInfo.startDate, "mmmm dS, yyyy") || 'N/A';
+            raceInfo.endDate = dateFormat(raceInfo.endDate, "mmmm dS, yyyy") || 'N/A';
+            raceInfo.type = raceInfo.type || 'N/A';
+            user.one(creatorId, function(creatorInfo){
+              res.render("joinRace", {user:data, extraInfo, raceInfo:raceInfo, creatorInfo:creatorInfo});
+            });
+          });
         });
       });
     });
@@ -126,7 +135,7 @@ router.get("/getRaceList/:id", function(req, res){
     for(i in data){
       data[i].startDate = dateFormat(data[i].startDate, "mmmm dS, yyyy");
       data[i].endDate = dateFormat(data[i].endDate, "mmmm dS, yyyy");
-      data[i].distance = (data[i].distance/1609.34).toFixed(2);
+      data[i].distance = (data[i].distance/1609.34).toFixed(2) || 0;
     }
     res.send(data);
   });

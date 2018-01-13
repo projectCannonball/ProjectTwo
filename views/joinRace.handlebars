@@ -2,7 +2,7 @@
         <div id="leftPanel" class="col-md-2">
             <!-- this is for purposes of grabbing the current displayed race line graph-->
             <div id="currUserID" value={{user.ID}} hidden></div>
-            <div id="currRaceID" value={{race}} hidden></div>
+            <div id="currRaceID" value={{raceInfo.ID}} hidden></div>
             <!-- back to the HTML -->
 
             <h2>DASHBOARD</h2>
@@ -33,30 +33,28 @@
 
     <div id="joinRace" class="row">
         <div class="col-md-3">
-            <h2>Create New Race</h2>
-            <h4>Name of Race</h4>
-            <p>The name of race</p>
+            <h2>{{raceInfo.raceName}}</h2>
             <h4 >Creator</h4>
-            <p>First Name</p>
+            <p>{{creatorInfo.userName}}</p>
         </div>
         <div class="col-md-3 pushDown">
             <h4 >Race Type</h4>
-            <p>Run</p>
+            <p>{{raceInfo.type}}</p>
             <h4 >Distance</h4>
-            <p>The name of race</p>
+            <p>{{raceInfo.distance}} miles</p>
         </div>
         <div class="col-md-3 pushDown">
             <h4 >Start Date</h4>
-            <p>January 1, 2018</p>
+            <p>{{raceInfo.startDate}}</p>
             <h4 >End Date</h4>
-            <p>June 1, 2018</p>
+            <p>{{raceInfo.endDate}}</p>
         </div>
 
         <div id="myButtons" class="col-md-3 ">
             <form action="/joinRace/{{user.ID}}" method="POST">
                 <button type="submit" class="btn btn-danger btn-block submit">Join</button>
             </form>
-            <a href="/{{user.id}}" class="btn btn-danger btn-block submit">Cancel</a>
+            <a href="/{{user.ID}}" class="btn btn-danger btn-block submit">Cancel</a>
         </div>
     </div>
 
