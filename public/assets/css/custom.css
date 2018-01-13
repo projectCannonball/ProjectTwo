@@ -22,7 +22,7 @@ h1 .navbar-brand {
     background-size: cover;
     background-repeat: no-repeat;
     box-shadow: 3px 3px 10px #404040;    
-    margin-bottom: 15px;
+    margin-bottom: 0 -15px 15px -15px;
 }
 
 #masthead h2 {
@@ -48,6 +48,12 @@ h1 .navbar-brand {
     width: 25%;
 }
 
+#wrapper .container-fluid {
+    margin: 0 -15px;
+    padding: 0;
+
+}
+
 #login {
     box-shadow: 2px 2px 3px #404040;        
     float: right;
@@ -55,14 +61,19 @@ h1 .navbar-brand {
     margin-top: 25px;
     width: 30%;
 }
+
 #login h4 {
     color: red;
     text-align: center;
 }
 
-#login .panel-title {
-    color: #555;
+#wrapper .container #login h3.panel-title {
+    color: #CD5C5C;
     font-size: 1.25em;
+}
+
+#login .panel-heading h3.panel-title {
+    font-size: 1.75;
 }
 
 #login input {
@@ -98,7 +109,7 @@ h1 .navbar-brand {
     margin: 0px;
 }
 
-.marketing h3 {
+#wrapper .container h3 {
     color: #CD5C5C;
     font-size: 4em;
     font-weight: 700;
@@ -114,9 +125,22 @@ h1 .navbar-brand {
     width: 100%;
 }
 
+#bottom {
+    margin-top: 0px;
+}
+
+.jumbotron .container #racePath .featurette-heading {
+    color: #ffffff;
+    font-size: 2.9em;
+    margin-top: 40px;
+    line-height: 1.2;
+    text-align: left;
+}
+
 .jumbotron {
     background-image: url("../images/race_path_gradient.jpg");
     background-size: cover;
+    background-position: 0 0px;
     background-repeat: no-repeat;
     color: #ffffff;
     height: auto;
@@ -126,10 +150,7 @@ h1 .navbar-brand {
     height: 700px;
 }
 
-.featurette-heading {
-    font-size: 3em;
-    margin-top: 40px;
-}
+
 
 /*** ACTIVITY PAGE ***/
 
@@ -149,33 +170,40 @@ h4 {
 
 #wrapper h2 {
     color: darkorange;
+    font-size: 2.5em;
 }
 
 #wrapper h3 {
     color: #c3c3c3;
 }
 
-#wrapper {
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    min-height:calc(100vh - 82px - 20px);
-}
-
 #wrapper p {
     font-size: 1.2em;
 }
 
-/* #displayStats {
+#wrapper #masthead h2 {
+    font-size: 4em;
+}
+
+#wrapper #masthead p {
+    font-size: 2em;
+}
+
+#wrapper {
+    margin: 0;
     padding: 0;
-} */
+    min-height:calc(100vh - 82px - 20px);
+}
 
 #leftPanel {
     background-color: black;
     color: lightgrey;
-    height: 525px;
     margin: 0;
-    padding-left: 40px; 
+    padding: 0 25px 25px 55px; 
+}
+
+#main h2 {
+    font-size: 1.5em;
 }
 
 #leftPanel h4 {
