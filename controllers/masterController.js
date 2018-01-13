@@ -40,7 +40,7 @@ router.get("/:id", function(req, res) {
               extraInfo.placeFirst = numOf1st.count || 0;
 
               userRace_history.getTotalDistance(userId, function(dist){
-                extraInfo.totDistance = dist.sum || 0;
+                extraInfo.totDistance = (dist.sum/1609.34).toFixed(2) || 0;
 
                 userRace_history.getSumStatsOfRaceUser(userId, raceId, function(sumStats){
                   extraInfo.totDistance = (sumStats.totDistance/1609.34).toFixed(2) || 0;
@@ -78,14 +78,58 @@ router.get("/chart/:userid/:raceid", function(req, res){
   })
 });
 
-router.get("/new/:id", function(req, res){
-  user.one(req.params.id, function(data){
-    res.render("newRace", data);
+router.get("/new/:id/:raceId", function(req, res){
+  var userId = req.params.id;
+  user.one(userId, function(data){
+    user_race.getNumOfRaces(userId, function(numRaces){
+      var extraInfo = {};
+
+      extraInfo.numRaces = numRaces.count || 0;
+      
+      user_race.getNumOf1st(userId, function(numOf1st){
+        extraInfo.placeFirst = numOf1st.count || 0;
+
+        userRace_history.getTotalDistance(userId, function(dist){
+          extraInfo.totDistance = (dist.sum/1609.34).toFixed(2) || 0;
+
+          res.render("newRace", {user:data, extraInfo});
+        });
+      });
+    });
   });
 });
 
-router.get("/join/:id", function(req, res){
-  res.render("joinRace");
+router.get("/join/:userId/:raceId", function(req, res){
+  var userId = req.params.userId;
+  var raceId = req.params.raceId;
+  user.one(userId, function(data){
+    user_race.getNumOfRaces(userId, function(numRaces){
+      var extraInfo = {};
+
+      extraInfo.numRaces = numRaces.count || 0;
+      
+      user_race.getNumOf1st(userId, function(numOf1st){
+        extraInfo.placeFirst = numOf1st.count || 0;
+
+        userRace_history.getTotalDistance(userId, function(dist){
+          extraInfo.totDistance = (dist.sum/1609.34).toFixed(2) || 0;
+
+          res.render("joinRace", {user:data, extraInfo});
+        });
+      });
+    });
+  });
+});
+
+router.get("/getRaceList/:id", function(req, res){
+  race.selectAll(function(data){
+    for(i in data){
+      data[i].startDate = dateFormat(data[i].startDate, "mmmm dS, yyyy");
+      data[i].endDate = dateFormat(data[i].endDate, "mmmm dS, yyyy");
+      data[i].distance = (data[i].distance/1609.34).toFixed(2);
+    }
+    res.send(data);
+  });
 });
 
 router.get("/past/:id", function(req, res){
