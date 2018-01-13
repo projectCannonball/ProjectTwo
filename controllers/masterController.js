@@ -107,6 +107,29 @@ router.put("/:id", function(req, res) {
 });
 
 //main post route that creates the new user
+router.post("/progress/:userId/:raceId", function(req, res) {
+  var time = null;
+  var distance = null;
+
+  //converts the distance to meters
+  if(req.body.distanceType === 'miles')
+    distance =req.body.distance*1609.34;
+  else
+    distance =req.body.distance*1000;
+
+  //converts the integers to seconds
+  time = parseInt(req.body.hours*60*60) + parseInt(req.body.minutes*60);
+
+  userRace_history.insert([
+    "user_id", "race_id", "distance", "time", "activityDt"
+  ], [
+    req.params.userId, req.params.raceId, distance, time, req.body.entryDate
+  ], function(id) {
+    res.redirect("/"+req.params.userId);
+  });
+});
+
+//main post route that creates the new user
 router.post("/", function(req, res) {
   user.insert([
     "userName", "firstName", "lastName", "password",
