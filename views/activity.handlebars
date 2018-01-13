@@ -20,8 +20,8 @@
             <p>826 miles</p>
             <br>
             <div class="text-center">
-                <a href="/new/{{ID}}" class="btn btn-default btn-block"><span class="glyphicon glyphicon-road"></span> Start New Race</a>
-                <a href="/join/{{ID}}" class="btn btn-default btn-block"><span class="glyphicon glyphicon-ok"></span> Join a Race</a>
+                <a href="/new/{{user.ID}}" class="btn btn-default btn-block"><span class="glyphicon glyphicon-road"></span> Start New Race</a>
+                <a href="/join/{{user.ID}}" class="btn btn-default btn-block"><span class="glyphicon glyphicon-ok"></span> Join a Race</a>
                 {{!-- <a href="/past/{{ID}}" class="btn btn-default btn-block"><span class="glyphicon glyphicon-stats"></span> Your Past Races</a> --}}
             </div>
         </div><!-- end leftPanel -->
@@ -30,7 +30,7 @@
                 <div id="map" ></div>
             </div>
             <div id="raceChart" class="col-md-2">
-                <h2>CURRENT RACE CHART</h2>
+                <h2>RACE CHART</h2>
                 <canvas id="myChart"></canvas>
             </div>
         </div>
