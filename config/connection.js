@@ -22,7 +22,7 @@ var getConnection = function(){
         console.error("error connecting: " + error);
         return reject();
       }
-      console.log("connected as id " + connection.threadId);
+
       return resolve(connection);
     });
   });

@@ -1,8 +1,13 @@
     <div id="main" class="row">
         <div id="leftPanel" class="col-md-2">
+            <!-- this is for purposes of grabbing the current displayed race line graph-->
+            <div id="currUserID" value={{user.ID}} hidden></div>
+            <div id="currRaceID" value={{race}} hidden></div>
+            <!-- back to the HTML -->
+            
             <h2>DASHBOARD</h2>
-            <p>{{firstName}} {{lastName}}<br>
-            {{city}}, {{state}}</p>
+            <p>{{user.firstName}} {{user.lastName}}<br>
+            {{user.city}}, {{user.state}}</p>
             
             <h4>Total Races</h4>
             <p>10</p>
@@ -14,9 +19,9 @@
             <p>826 miles</p>
             <br>
             <div class="text-center">
-                <a href="/new/{{ID}}" id="newRace" class="btn btn-default btn-block"><span class="glyphicon glyphicon-road"></span> Start New Race</a>
-                <a href="/join/{{ID}}" id="joinRace" class="btn btn-default btn-block"><span class="glyphicon glyphicon-ok"></span> Join a Race</a>
-                <a href="/past/{{ID}}" id="pastRaces" class="btn btn-default btn-block"><span class="glyphicon glyphicon-stats"></span> Your Past Races</a>
+                <a href="/new/{{user.ID}}/{{race}}" id="newRace" class="btn btn-default btn-block"><span class="glyphicon glyphicon-road"></span> Start New Race</a>
+                <a href="" id="joinBtn" id="joinRace" class="btn btn-default btn-block" data-toggle="modal" data-target="#joinRace"><span class="glyphicon glyphicon-ok"></span> Join a Race</a>
+                <a href="/past/{{user.ID}}" id="pastRaces" class="btn btn-default btn-block"><span class="glyphicon glyphicon-stats"></span> Your Past Races</a>
             </div>
         </div><!-- end leftPanel -->
 
@@ -80,16 +85,6 @@
     </div>
  
 
-
-
-
-
-
-
-
-
-
-
     <!-- Modal -->
     <div id="updateModal" class="modal fade" role="dialog">
         <div class="modal-dialog">
@@ -130,3 +125,22 @@
             </div>
         </div>
     </div> <!-- /end updateModal -->
+
+    <!-- Modal -->
+    <div id="joinRace" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h2 class="modal-title">Select Race To Join</h2>
+                </div>
+                <div class="modal-body">
+                    <div id="raceList"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /end Modal -->
+
+    <script type="text/javascript" src="/assets/js/join.js"></script>
