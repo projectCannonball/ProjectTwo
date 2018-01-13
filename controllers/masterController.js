@@ -78,7 +78,7 @@ router.get("/chart/:userid/:raceid", function(req, res){
   })
 });
 
-router.get("/new/:id/:raceId", function(req, res){
+router.get("/new/:id", function(req, res){
   var userId = req.params.id;
   user.one(userId, function(data){
     user_race.getNumOfRaces(userId, function(numRaces){
@@ -173,16 +173,17 @@ router.post("/progress/:userId/:raceId", function(req, res) {
   });
 });
 
-//main post route that creates the new user
-router.post("/", function(req, res) {
-  user.insert([
-    "userName", "firstName", "lastName", "password",
-    "city", "state", "email"
-  ], [
-    req.body.userName, req.body.firstName, req.body.lastName, req.body.password,
-    req.body.city, req.body.state, req.body.email
-  ], function(id) {
-    res.redirect("/"+id);
+//creates the race in the database
+router.post("/createNewRace/:userId", function(req, res){
+  race.insertOne([
+    "raceName", "raceDesc", "startDate", "endDate",
+    "startLoc", "endLoc", "type", "route", "distance"
+  ],
+  [
+    req.body.raceName, req.body.raceDesc, req.body.startDate, req.body.endDate,
+    req.body.startLoc, req.body.endLoc, req.body.type, req.body.route, req.body.distance
+  ],function(id){
+    res.send("/"+req.params.userId);
   });
 });
 
@@ -197,5 +198,17 @@ router.post("/activity", function(req, res){
   });
 });
 
+//main post route that creates the new user
+router.post("/", function(req, res) {
+  user.insert([
+    "userName", "firstName", "lastName", "password",
+    "city", "state", "email"
+  ], [
+    req.body.userName, req.body.firstName, req.body.lastName, req.body.password,
+    req.body.city, req.body.state, req.body.email
+  ], function(id) {
+    res.redirect("/"+id);
+  });
+});
 // Export routes for server.js to use.
 module.exports = router;

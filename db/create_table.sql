@@ -24,10 +24,8 @@ CREATE TABLE Races (
     distance DECIMAL(20, 5) NOT NULL,
     startDate DATE NOT NULL,
     endDate DATE NOT NULL,
-    startLat DECIMAL(7,4) NOT NULL,
-    startLon DECIMAL(7,4) NOT NULL,
-    endLat DECIMAL(7,4) NOT NULL,
-    endLon DECIMAL(7,4) NOT NULL,
+    startLoc VARCHAR(255) NOT NULL,
+    endLoc VARCHAR(255) NOT NULL,
     type VARCHAR(255),
     create_ts TIMESTAMP NOT NULL DEFAULT current_timestamp,
     update_ts TIMESTAMP NOT NULL DEFAULT current_timestamp ON UPDATE current_timestamp

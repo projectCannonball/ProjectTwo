@@ -9,5 +9,4 @@ $("#joinBtn").on("click", function(){
             '</a></label><label>'+data[i].startDate+'</label><label>'+data[i].endDate+'</label><label>'+data[i].distance+' miles</label></div>');
         }
     });
-    
 });
