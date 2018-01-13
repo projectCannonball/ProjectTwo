@@ -30,6 +30,12 @@ var userRace_history = {
             }
             cb(results);
         })
+    },
+    //gets the total distances user covered
+    getTotalDistance: function(userId, cb){
+        orm.sumCol("USERRACE_HISTORY", "distance", "user_id", userId, function(result){
+            cb(result);
+        });
     }
 };
 

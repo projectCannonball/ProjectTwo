@@ -11,17 +11,17 @@
             {{user.city}}, {{user.state}}</p>
             
             <h4>Total Races</h4>
-            <p>10</p>
+            <p>{{extraInfo.numRaces}}</p>
             
             <h4>1st Place Wins</h4>
-            <p>2</p>
+            <p>{{extraInfo.placeFirst}}</p>
             
             <h4>Total Distance</h4>
-            <p>826 miles</p>
+            <p>{{extraInfo.totDistance}}</p>
             <br>
             <div class="text-center">
-                <a href="/new/{{ID}}" class="btn btn-default btn-block"><span class="glyphicon glyphicon-road"></span> Start New Race</a>
-                <a href="/join/{{ID}}" class="btn btn-default btn-block"><span class="glyphicon glyphicon-ok"></span> Join a Race</a>
+                <a href="/new/{{user.ID}}" class="btn btn-default btn-block"><span class="glyphicon glyphicon-road"></span> Start New Race</a>
+                <a href="/join/{{user.ID}}" class="btn btn-default btn-block"><span class="glyphicon glyphicon-ok"></span> Join a Race</a>
                 {{!-- <a href="/past/{{ID}}" class="btn btn-default btn-block"><span class="glyphicon glyphicon-stats"></span> Your Past Races</a> --}}
             </div>
         </div><!-- end leftPanel -->
