@@ -26,7 +26,7 @@ CREATE TABLE Races (
     endDate DATE NOT NULL,
     startLoc VARCHAR(255) NOT NULL,
     endLoc VARCHAR(255) NOT NULL,
-    type VARCHAR(255),
+    type VARCHAR(255) NOT NULL,
     creator_id INT NOT NULL,
     create_ts TIMESTAMP NOT NULL DEFAULT current_timestamp,
     update_ts TIMESTAMP NOT NULL DEFAULT current_timestamp ON UPDATE current_timestamp
