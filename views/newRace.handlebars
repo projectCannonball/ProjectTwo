@@ -14,18 +14,17 @@
             <p>826 miles</p>
             <br>
             <div class="text-center">
-                <a href="/new/{{ID}}" class="btn btn-default btn-block"><span class="glyphicon glyphicon-road"></span> Start New Race</a>
-                <a href="/join/{{ID}}" class="btn btn-default btn-block"><span class="glyphicon glyphicon-ok"></span> Join a Race</a>
+                <a href="/new/{{user.ID}}" class="btn btn-default btn-block"><span class="glyphicon glyphicon-road"></span> Start New Race</a>
+                <a href="/join/{{user.ID}}" class="btn btn-default btn-block"><span class="glyphicon glyphicon-ok"></span> Join a Race</a>
                 {{!-- <a href="/past/{{ID}}" class="btn btn-default btn-block"><span class="glyphicon glyphicon-stats"></span> Your Past Races</a> --}}
             </div>
         </div><!-- end leftPanel -->
 
         <div id="raceTracker" class="col-md-10">
-
-
-
-        </div>    
-
+            <div id="map"></div>
+            </div>
+        </div>   
+`
     </div> <!-- /end Main Content -->
 
     <div id="newRace" class="row">
@@ -41,10 +40,9 @@
                     <div id="raceType" class="form-group"> 
                         <label for="">Race Type</label>
                         <select class="form-control" id="raceName" name="raceName">
-                            <option value="volvo">Run</option>
-                            <option value="saab">Bike</option>
-                            <option value="fiat">Walk</option>
-                            <option value="audi">Audi</option>
+                            <option value="run">Run</option>
+                            <option value="bike">Bike</option>
+                            <option value="walk">Walk</option>
                         </select>
                     </div>
                     <br>
@@ -78,3 +76,7 @@
             <a href="#" class="btn btn-danger btn-block submit">Cancel</a>
         </div>
     </div>
+
+    <script type="text/javascript" src="/assets/js/map.js"></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCD0PxTVDTzOnoekoDGB2RkbYUZ5OhO0Ko&callback=initMap"
+    type="text/javascript"></script>

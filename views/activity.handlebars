@@ -11,18 +11,19 @@
             {{user.city}}, {{user.state}}</p>
             
             <h4>Total Races</h4>
-            <p>10</p>
+            <p>{{extraInfo.numRaces}}</p>
             
             <h4>1st Place Wins</h4>
-            <p>2</p>
+            <p>{{extraInfo.placeFirst}}</p>
             
             <h4>Total Distance</h4>
-            <p>826 miles</p>
+            <p>{{extraInfo.totDistance}}</p>
             <br>
             <div class="text-center">
 
-                <a href="/new/{{ID}}" class="btn btn-default btn-block"><span class="glyphicon glyphicon-road"></span> Start New Race</a>
-                <a href="/join/{{ID}}" class="btn btn-default btn-block"><span class="glyphicon glyphicon-ok"></span> Join a Race</a>
+                <a href="/new/{{user.ID}}" class="btn btn-default btn-block"><span class="glyphicon glyphicon-road"></span> Start New Race</a>
+                <a href="/join/{{user.ID}}" class="btn btn-default btn-block"><span class="glyphicon glyphicon-ok"></span> Join a Race</a>
+
                 {{!-- <a href="/past/{{ID}}" class="btn btn-default btn-block"><span class="glyphicon glyphicon-stats"></span> Your Past Races</a> --}}
 
             </div>
@@ -33,7 +34,7 @@
                 <div id="map" ></div>
             </div>
             <div id="raceChart" class="col-md-2">
-                <h2>CURRENT RACE CHART</h2>
+                <h2>RACE CHART</h2>
                 <canvas id="myChart"></canvas>
             </div>
         </div>
@@ -52,20 +53,20 @@
         <div class="col-md-12">
             <div class="col-md-3">
                 <h4>Total Distance Covered</h4>
-                <p>72 miles</p>
-                <h4>Session Distance Covered</h4>
-                <p>6 miles</p>
+                <p>{{extraInfo.totDistance}} miles</p>
                 <h4>Total Duration</h4>
-                <p>10.8 hours</p>
-                <h4>Session Duration</h4>
+                <p>{{extraInfo.totTime}} hours</p>
+                <h4>Latest Activity Distance</h4>
+                <p>6 miles</p>
+                <h4>Latest Activity Duration</h4>
                 <p>2 hours</p>                  
             </div>
             
             <div class="col-md-3">
                 <h4>Average Pace</h4>
-                <p>9.1 minute mile</p>
+                <p>{{extraInfo.avgPace}} minute mile</p>
                 <h4>Average Speed</h4>
-                <p>6.6 mph</p>
+                <p>{{extraInfo.avgSpeed}} mph</p>
                 <h4>Current Position</h4>
                 <p>5th</p>
             </div>
@@ -84,7 +85,7 @@
                 <h4>Race End Date</h4>
                 <p>{{raceInfo.endDate}}</p>       
                 <h4>Distance Remaining</h4>
-                <p>152 miles</p>
+                <p>{{extraInfo.distRemaining}} miles</p>
             </div>
         </div>
     </div>
