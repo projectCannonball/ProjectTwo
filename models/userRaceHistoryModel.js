@@ -51,6 +51,20 @@ var userRace_history = {
                 cb(results[0]);
             });
         });
+    },
+    //get most recent activity for user for selected race
+    getSelectedActivity: function(userId, raceId, cb){
+        pool.getConnection().then(function(connection){
+            connection.query("SELECT * FROM userRace_history urh "+
+                "WHERE urh.activityDt = (SELECT MAX(activityDt) FROM userRace_history urh2 WHERE urh.user_id = urh2.user_id AND urh.race_id = urh2.race_id) "+
+                "AND urh.user_id = ? AND urh.race_id = ?;", [userId, raceId], function(error, results){
+                if(error) throw error;
+
+                pool.closeConnection(connection);
+
+                cb(results[0]);
+            });
+        });
     }
 };
 

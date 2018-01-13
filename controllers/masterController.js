@@ -1,5 +1,6 @@
 //imports the npm package
 var express = require("express");
+var dateFormat = require('dateformat');
 
 //creates the router controller from the express servers
 var router = express.Router();
@@ -24,9 +25,14 @@ router.get("/:id", function(req, res) {
     user.one(userId, function(data){
       user_race.getActiveRace(userId, function(data2){
         race.selectAllForOne("id", data2, function(raceInfo){
-          var raceId 
-          if(raceInfo)
+
+          var raceId = null;
+          if(raceInfo){
             raceId = raceInfo.ID;
+            raceInfo.startDate = dateFormat(raceInfo.startDate, "mmmm dS, yyyy") || 'N/A';
+            raceInfo.endDate = dateFormat(raceInfo.endDate, "mmmm dS, yyyy") || 'N/A';
+          }
+
           user_race.getNumOfRaces(userId, function(numRaces){
             var extraInfo = {};
 
@@ -44,7 +50,21 @@ router.get("/:id", function(req, res) {
                   extraInfo.distRemaining = (sumStats.distRemaining/1609.34).toFixed(2) || 0;
                   extraInfo.avgSpeed = (sumStats.avgSpeed/0.44704).toFixed(2) || 0;
                   extraInfo.avgPace = (sumStats.avgPace/0.0372823).toFixed(2) || 0;
-                  res.render("activity", {user:data, race:data2, raceInfo:raceInfo,extraInfo});
+
+                  userRace_history.getSelectedActivity(userId, raceId, function(recentActivity){
+                    if(recentActivity){
+                      extraInfo.latestDist = (recentActivity.distance/1609.34).toFixed(2);
+                      extraInfo.latestTime = (recentActivity.time/60/60).toFixed(2);
+                      extraInfo.latestDt = dateFormat(recentActivity.activityDt, "mmmm dS, yyyy");
+                    }
+                    else{
+                      extraInfo.latestDist = 0;
+                      extraInfo.latestTime = 0;
+                      extraInfo.latestDt = 'N/A';
+                    }
+
+                    res.render("activity", {user:data, race:data2, raceInfo:raceInfo, extraInfo});
+                  });
                 });
               });
             });
