@@ -45,6 +45,18 @@ var user_race = {
             });
             console.log(q.sql)
         });
+    },
+    //get the number of races a user has/is in
+    getNumOfRaces: function(userId, cb){
+        orm.countCol("USER_RACE", "race_id", "user_id", userId, function(res){
+            cb(res);
+        });
+    },
+    //get the number of 1st placeraces a user is in a race
+    getNumOf1st: function(userId, cb){
+        orm.countColwith2Con("USER_RACE", "race_id", ["user_id", "finishPlace"], [userId, 1], function(res){
+            cb(res);
+        });
     }
 };
 

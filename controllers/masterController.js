@@ -24,7 +24,21 @@ router.get("/:id", function(req, res) {
     user.one(userId, function(data){
       user_race.getActiveRace(userId, function(data2){
         race.selectAllForOne("id", data2, function(raceInfo){
-          res.render("activity", {user:data, race:data2, raceInfo:raceInfo});
+          user_race.getNumOfRaces(userId, function(numRaces){
+            var extraInfo = {};
+
+            extraInfo.numRaces = numRaces.count;
+            
+            user_race.getNumOf1st(userId, function(numOf1st){
+              extraInfo.placeFirst = numOf1st.count;
+
+              userRace_history.getTotalDistance(userId, function(dist){
+                extraInfo.totDistance = dist.sum || 0;
+
+                res.render("activity", {user:data, race:data2, raceInfo:raceInfo,extraInfo});
+              });
+            });
+          });
         });
       });
     });

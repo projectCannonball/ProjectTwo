@@ -74,6 +74,36 @@ var orm = {
                 pool.closeConnection(connection);
             });
         });
+    },
+    countCol: function(table, col, condCol, condVal, func){
+        pool.getConnection().then(function(connection){
+            connection.query("SELECT COUNT(??) as count FROM ?? WHERE ?? = ?", [col, table, condCol, condVal], function(error, data){
+                if(error) throw error;
+
+                func(data[0]);
+                pool.closeConnection(connection);
+            });
+        });
+    },
+    countColwith2Con: function(table, col, condCol, condVal, func){
+        pool.getConnection().then(function(connection){
+            connection.query("SELECT COUNT(??) as count FROM ?? WHERE ?? = ? AND ?? = ?", [col, table, condCol[0], condVal[0], condCol[1], condVal[1]], function(error, data){
+                if(error) throw error;
+
+                func(data[0]);
+                pool.closeConnection(connection);
+            });
+        });
+    },
+    sumCol: function(table, col, condCol, condVal, func){
+        pool.getConnection().then(function(connection){
+            connection.query("SELECT SUM(??) as sum FROM ?? WHERE ?? = ?", [col, table, condCol, condVal], function(error, data){
+                if(error) throw error;
+
+                func(data[0]);
+                pool.closeConnection(connection);
+            });
+        });
     }
 }
 
