@@ -42,7 +42,7 @@ router.get("/:id", function(req, res) {
               extraInfo.placeFirst = numOf1st.count || 0;
 
               userRace_history.getTotalDistance(userId, function(dist){
-                extraInfo.totDistance = dist.sum || 0;
+                extraInfo.totDistance = (dist.sum/1609.34).toFixed(2) || 0;
 
                 userRace_history.getSumStatsOfRaceUser(userId, raceId, function(sumStats){
                   extraInfo.totDistance = (sumStats.totDistance/1609.34).toFixed(2) || 0;
@@ -80,14 +80,58 @@ router.get("/chart/:userid/:raceid", function(req, res){
   })
 });
 
-router.get("/new/:id", function(req, res){
-  user.one(req.params.id, function(data){
-    res.render("newRace", data);
+router.get("/new/:id/:raceId", function(req, res){
+  var userId = req.params.id;
+  user.one(userId, function(data){
+    user_race.getNumOfRaces(userId, function(numRaces){
+      var extraInfo = {};
+
+      extraInfo.numRaces = numRaces.count || 0;
+      
+      user_race.getNumOf1st(userId, function(numOf1st){
+        extraInfo.placeFirst = numOf1st.count || 0;
+
+        userRace_history.getTotalDistance(userId, function(dist){
+          extraInfo.totDistance = (dist.sum/1609.34).toFixed(2) || 0;
+
+          res.render("newRace", {user:data, extraInfo});
+        });
+      });
+    });
   });
 });
 
-router.get("/join/:id", function(req, res){
-  res.render("joinRace");
+router.get("/join/:userId/:raceId", function(req, res){
+  var userId = req.params.userId;
+  var raceId = req.params.raceId;
+  user.one(userId, function(data){
+    user_race.getNumOfRaces(userId, function(numRaces){
+      var extraInfo = {};
+
+      extraInfo.numRaces = numRaces.count || 0;
+      
+      user_race.getNumOf1st(userId, function(numOf1st){
+        extraInfo.placeFirst = numOf1st.count || 0;
+
+        userRace_history.getTotalDistance(userId, function(dist){
+          extraInfo.totDistance = (dist.sum/1609.34).toFixed(2) || 0;
+
+          res.render("joinRace", {user:data, extraInfo});
+        });
+      });
+    });
+  });
+});
+
+router.get("/getRaceList/:id", function(req, res){
+  race.selectAll(function(data){
+    for(i in data){
+      data[i].startDate = dateFormat(data[i].startDate, "mmmm dS, yyyy");
+      data[i].endDate = dateFormat(data[i].endDate, "mmmm dS, yyyy");
+      data[i].distance = (data[i].distance/1609.34).toFixed(2);
+    }
+    res.send(data);
+  });
 });
 
 router.get("/past/:id", function(req, res){
@@ -115,6 +159,29 @@ router.post("/progress/:userId/:raceId", function(req, res) {
     req.params.userId, req.params.raceId, req.body.distance,
   ], function(id) {
     res.redirect("/"+id);
+  });
+});
+
+//main post route that creates the new user
+router.post("/progress/:userId/:raceId", function(req, res) {
+  var time = null;
+  var distance = null;
+
+  //converts the distance to meters
+  if(req.body.distanceType === 'miles')
+    distance =req.body.distance*1609.34;
+  else
+    distance =req.body.distance*1000;
+
+  //converts the integers to seconds
+  time = parseInt(req.body.hours*60*60) + parseInt(req.body.minutes*60);
+
+  userRace_history.insert([
+    "user_id", "race_id", "distance", "time", "activityDt"
+  ], [
+    req.params.userId, req.params.raceId, distance, time, req.body.entryDate
+  ], function(id) {
+    res.redirect("/"+req.params.userId);
   });
 });
 
