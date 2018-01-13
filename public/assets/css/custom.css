@@ -212,17 +212,17 @@ h4 {
 
 #raceTracker {
     background: lightgrey;
-
-    min-height: 425px;
-
+    min-height: 387px;
     padding: 0;
 }
 
 /* Always set the map height explicitly to define the size of the div
          * element that contains the map. */
 #map {
-    position:relative;
-    height:425px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height:100%;
     width:100%;
 }
 
@@ -343,8 +343,9 @@ footer {
     width: 70px;
 }
 
+
+
 /** NEW RACE MODAL **/
 #newRaceModal #raceName {
     width: 312px;
 }
-

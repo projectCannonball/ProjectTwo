@@ -24,7 +24,9 @@ router.get("/:id", function(req, res) {
     user.one(userId, function(data){
       user_race.getActiveRace(userId, function(data2){
         race.selectAllForOne("id", data2, function(raceInfo){
-          var raceId = raceInfo.ID;
+          var raceId 
+          if(raceInfo)
+            raceId = raceInfo.ID;
           user_race.getNumOfRaces(userId, function(numRaces){
             var extraInfo = {};
 
@@ -52,12 +54,10 @@ router.get("/:id", function(req, res) {
     });
 });
 
-
 router.get("/chart/:userid/:raceid", function(req, res){
-
   userRace_history.chartSelectedInfo(["user_id", "race_id"], [req.params.userid, req.params.raceid], function(data){
     res.send(data);
-  });
+  })
 });
 
 router.get("/new/:id", function(req, res){

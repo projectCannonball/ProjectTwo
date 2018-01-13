@@ -9,14 +9,11 @@ var arr = [];
 var directionService;
 var directionDisplay;
 var startPos = "Chicago";
-
 var endPos = "New York City";
-
 var marker;
 var markers = [];
 var draw = false;
 var storedLatLng = [];
-
 
 //function to get the id's stored on the page
 var getRace = function(){
@@ -49,7 +46,6 @@ var getRace = function(){
       marker = new google.maps.Marker({
         position: route[route.length-1],
         map: map
-        icon: BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)
       });
 
       loc = new google.maps.LatLng(marker.position.lat(), marker.position.lng());
@@ -62,7 +58,6 @@ var getRace = function(){
     }
   });
 }
-
 
 function initMap() {
   directionService = new google.maps.DirectionsService;
@@ -173,7 +168,6 @@ function initMap() {
   });
   poly.setMap(map);
 
-
   //calls the function to draw the path
   //calculateAndDisplayRoute(directionService, directionDisplay);
 
@@ -191,7 +185,6 @@ function calculateAndDisplayRoute(directionService, directionDisplay){
       console.log(response)
       // directionDisplay.setMap(map);
       // directionDisplay.setDirections(response);
-
       var path = poly.getPath();
       path.clear();
       storedLatLng = [];
@@ -201,11 +194,6 @@ function calculateAndDisplayRoute(directionService, directionDisplay){
           lat: response.routes[0].overview_path[i].lat(),
           lng: response.routes[0].overview_path[i].lng()
         });
-
-      }
-      poly.setPath(storedLatLng);
-    } else {
-      window.alert(`Direction request failed due to ${status}`);
         //if(i == 1){
          // console.log(response.routes[0].overview_path[i]);
           
@@ -219,6 +207,14 @@ function calculateAndDisplayRoute(directionService, directionDisplay){
         //     map: map
         //   });
         // }
+      }
+      poly.setPath(storedLatLng);
+      console.log(response.routes[0].overview_path);
+      console.log(JSON.stringify(storedLatLng));
+
+      //poly.setMap(map);
+    } else {
+      window.alert('Direction request failed due to '+status);
       arr = [];
     }
   });
