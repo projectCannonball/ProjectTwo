@@ -30,14 +30,13 @@ var orm = {
     },
     selectOne:function(table, conCol, condition, func){
         pool.getConnection().then(function(connection){
-            var q =connection.query("SELECT * FROM ?? WHERE ?? = ?", [table, conCol, condition], function(error, data){
+            connection.query("SELECT * FROM ?? WHERE ?? = ?", [table, conCol, condition], function(error, data){
                 if(error) throw error;
                 
                 func(data[0]);
 
                 pool.closeConnection(connection);
             });
-            console.log(q.sql);
         });
     },
     selectId:function(table, conCol1, cond1, conCol2, cond2, func){
