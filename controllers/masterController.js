@@ -24,8 +24,10 @@ router.get("/:id", function(req, res) {
     user.one(userId, function(data){
       user_race.getActiveRace(userId, function(data2){
         race.selectAllForOne("id", data2, function(raceInfo){
-          var raceId = raceInfo.ID;
-          user_race.getNumOfRaces(userId, function(numRaces){
+          var raceId 
+          if(raceInfo)
+            raceId = raceInfo.ID;
+            user_race.getNumOfRaces(userId, function(numRaces){
             var extraInfo = {};
 
             extraInfo.numRaces = numRaces.count || 0;
