@@ -4,16 +4,38 @@
 
 var poly;
 var map;
-var arr = [];
-
 var directionService;
 var directionDisplay;
-var startPos = "Chicago";
-var endPos = "New York City";
 var marker;
 var markers = [];
 var draw = false;
 var storedLatLng = [];
+var latLon = [];
+var distance = null;
+
+
+//The prototype from Gisgraphy:
+GetPointAtDistance = function(metres) {
+  // some awkward special cases
+  if (metres == 0) return poly.getPath().getAt(0);
+  if (metres < 0) return null;
+  if (poly.getPath().getLength() < 2) return null;
+  var dist=0;
+  var olddist=0;
+  for (var i=1; (i < poly.getPath().getLength() && dist < metres); i++) {
+  olddist = dist;
+  dist += google.maps.geometry.spherical.computeDistanceBetween (
+    poly.getPath().getAt(i),
+    poly.getPath().getAt(i-1)
+  );
+  }
+  if (dist < metres) return null;
+  var p1= poly.getPath().getAt(i-2);
+  var p2= poly.getPath().getAt(i-1);
+  var m = (metres-olddist)/(dist-olddist);
+  return new google.maps.LatLng( p1.lat() + (p2.lat()-p1.lat())*m, p1.lng() + (p2.lng()-p1.lng())*m);
+}
+
 
 //function to get the id's stored on the page
 var getRace = function(){
@@ -32,6 +54,7 @@ var getRace = function(){
       var route = JSON.parse(results.route);
       bounds  = new google.maps.LatLngBounds();
 
+      //sets the route to be drawn for the race
       poly.setPath(route);
 
       //adds the start marker
@@ -40,6 +63,7 @@ var getRace = function(){
         map: map
       });
 
+      
       loc = new google.maps.LatLng(marker.position.lat(), marker.position.lng());
       bounds.extend(loc);
   
@@ -60,12 +84,25 @@ var getRace = function(){
 
       map.fitBounds(bounds);
       map.panToBounds(bounds);
+
+      //gets a lat,lng of where the person is at on the path
+      var latlng = GetPointAtDistance(parseFloat($("#totalDistance").html())*1609.34);
+
+      //adds the end markers
+      marker = new google.maps.Marker({
+        position: latlng,
+        map: map
+      });
     }
   });
 }
 
+<<<<<<< HEAD
 
 
+=======
+//draws the Google maps
+>>>>>>> 7c1d1de78688595b6c32c85d769cbd62a7e10dba
 function initMap() {
   directionService = new google.maps.DirectionsService;
   directionDisplay = new google.maps.DirectionsRenderer;
@@ -168,12 +205,14 @@ function initMap() {
             ]
   });    
 
+  //draws a polyline
   poly = new google.maps.Polyline({
     strokeColor: "#ff0000",
     strokeOpacity: 1.0,
     strokeWeight: 3
   });
   poly.setMap(map);
+
 
 
   console.log(`Pathname: ${window.location.pathname}`);
@@ -227,29 +266,71 @@ function calculateAndDisplayRoute(directionService, directionDisplay){
         //     map: map
         //   });
         // }
-      }
-      poly.setPath(storedLatLng);
-      console.log(response.routes[0].overview_path);
-      console.log(JSON.stringify(storedLatLng));
 
-      //poly.setMap(map);
-    } else {
-      window.alert('Direction request failed due to '+status);
-      arr = [];
-    }
-  });
+  //Add a listener for the click event
+  if(window.location.pathname.indexOf("/new/") != -1)
+    map.addListener('click', addLatLng);
+}
+
+//function to run for the direction features of Google maps
+function calculateAndDisplayRoute(directionService, directionDisplay){
+  var start = null;
+  var end = null;
+  var goodToGo = false;
+
+  if($("#startLocation").val() && $("#endLocation").val()){
+    start = $("#startLocation").val();
+    end = $("#endLocation").val();
+    goodToGo = true;
+  }
+  else if(latLon.length >= 2)
+    goodToGo = true;
+
+  if(goodToGo){
+    directionService.route({
+      origin: start || latLon[0],
+      destination: end || latLon[1],
+      travelMode: $("select[name=type]").val()||'BICYCLING',
+    }, function(response, status){
+      if(status === 'OK'){
+        console.log(response)
+        directionDisplay.setMap(map);
+        directionDisplay.setDirections(response);
+
+        distance = response.routes[0].legs[0].distance.value;
+
+        storedLatLng = [];
+        for(i in response.routes[0].overview_path){
+          //path.push(response.routes[0].overview_path[i]);
+          storedLatLng.push({
+            lat: response.routes[0].overview_path[i].lat(),
+            lng: response.routes[0].overview_path[i].lng()
+          });
+        }
+      } else {
+        window.alert('Direction request failed due to '+status);
+
+      }
+    });
+  }
 }
 
 // Handles click events on a map, and adds a new point to the Polyline.
 function addLatLng(event) {
   console.log(event.latLng)
-  //var path = poly.getPath();
-
-  // Because path is an MVCArray, we can simply append a new coordinate
-  // and it will automatically appear.
-  //path.push(event.latLng); 
   
-  if(arr.length < 2){
+  if(markers.length >= 2){
+    draw = false;
+
+    for(let key in markers) {
+      markers[key].setMap(null);
+    }
+    markers = [];
+    latLon = [];
+    directionDisplay.setMap(null);
+  }
+  
+  if(markers.length < 2){
     // Add a new marker at the new plotted point on the polyline.
     
     marker = new google.maps.Marker({
@@ -258,10 +339,11 @@ function addLatLng(event) {
     });
 
     markers.push(marker);
-    arr.push(event.latLng);
+
+    latLon.push(event.latLng);
   }
 
-  if(!draw && arr.length == 2){
+  if(!draw && markers.length == 2){
     draw = true;
 
     calculateAndDisplayRoute(directionService, directionDisplay);
@@ -269,11 +351,87 @@ function addLatLng(event) {
     for(let key in markers) {
       markers[key].setMap(null);
     }
-    markers = [];
+    //markers = [];
   }
-  console.log(marker)
 }
 
+<<<<<<< HEAD
 
 
 $(document).ready(getRace());
+=======
+$(document).ready(function(){
+    if(window.location.pathname.indexOf("/new/") == -1)
+      getRace();
+
+    $("#mapRace").on("click", function(){
+      calculateAndDisplayRoute(directionService, directionDisplay);
+    });
+
+    $("#createRace").on("click", function(){
+      createRace();
+    });
+  }
+);
+
+//populates the race table with the new race data
+function createRace(){
+  var start = null;
+  var end = null;
+  var goodToGo = false;
+
+  if($("#startLocation").val() && $("#endLocation").val()){
+    start = $("#startLocation").val();
+    end = $("#endLocation").val();
+    goodToGo = true;
+    sendRaceInfo(start, end);
+  }
+  else if(latLon.length >= 2){
+    goodToGo = true;
+  }
+    
+
+  if(goodToGo){
+    if(!start)
+    $.ajax({
+      url: "http://maps.googleapis.com/maps/api/geocode/json?latlng="+latLon[0].lat()+","+latLon[0].lng()+"&sensor=true",
+      method: "GET"
+    }).done(function(response){
+      start = response.results[0].formatted_address;
+
+      $.ajax({
+        url: "http://maps.googleapis.com/maps/api/geocode/json?latlng="+latLon[1].lat()+","+latLon[1].lng()+"&sensor=true",
+        method: "GET"
+      }).done(function(response){
+        end = response.results[0].formatted_address;
+
+        sendRaceInfo(start, end);
+      });
+    });
+  };
+}
+
+//sends the create race info to the api
+function sendRaceInfo(start, end){
+  var info = {
+    raceName: $("input[name=raceName").val(),
+    raceDesc: $("#raceDesc").val(),
+    startDate: $("#startDate").val(),
+    endDate: $("#endDate").val(),
+    startLoc: start,
+    endLoc: end,
+    type: $("select[name=type]").val(),
+    route: JSON.stringify(storedLatLng),
+    distance: distance
+  };
+  console.log(storedLatLng)
+
+  $.ajax({
+    url: "/createNewRace/"+$("#currUserID").attr("value"),
+    method: "POST",
+    data: info
+  }).done(function(response){
+    location.pathname = "/"+$("#currUserID").attr("value");
+  });
+}
+>>>>>>> 7c1d1de78688595b6c32c85d769cbd62a7e10dba
