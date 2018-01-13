@@ -49,6 +49,7 @@ var getRace = function(){
       marker = new google.maps.Marker({
         position: route[route.length-1],
         map: map
+        icon: BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)
       });
 
       loc = new google.maps.LatLng(marker.position.lat(), marker.position.lng());

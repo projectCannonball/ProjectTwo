@@ -184,7 +184,11 @@ h4 {
 
 #raceTracker {
     background: lightgrey;
+<<<<<<< HEAD
     min-height: 425px;
+=======
+    min-height: 387px;
+>>>>>>> 0b6236e980e0da4ad1776e9fec5a54ddd7c2ed38
     padding: 0;
 }
 
@@ -197,9 +201,8 @@ h4 {
 }
 
 #barChart {
-    background: black;
-    box-shadow: 0 3px 10px #404040;        
-    height: 325px;
+    background-color: darkgray;
+    min-height: 387px;
 }
 
 #raceStats {
@@ -218,10 +221,74 @@ h4 {
     color: #CD5C5C;
 }
 
+/* #raceStats span {
+    color: #CD5C5C;
+} */
+
 #update {
     margin-top: 15px;
 }
 
+footer {
+    padding: 0 20px;
+}
+
+
+/*** NEW RACE PAGE PAGE ***/
+
+#newRace h2 {
+    color: #CD5C5C;    
+}
+
+#newRace {
+    margin: 0 10px;
+}
+
+#raceDesc {
+    margin: 54px 0 0 0;
+    padding: 0;
+}
+
+#raceDesc {
+    height: 100px;
+}
+
+#textbox {
+    font-size: 1.75em;
+    padding: 0 10px 6px 10px;
+    width: 100%;
+}
+
+#myButtons {
+    margin-top: 80px;
+}
+
+/*** JOIN RACE PAGE ***/
+#joinRace h2 {
+    color: #CD5C5C;    
+}
+
+#joinRace h4 {
+    color: #CD5C5C;    
+}
+
+#joinRace {
+    margin: 0 10px;
+}
+
+
+#joinRace #myButtons {
+    margin-top: 55px;
+}
+
+.pushDown {
+    margin-top: 43px;
+}
+
+
+/********* ALL MODALS *********/
+
+/*** UPDATE MODAL ***/
 #updateModal .modal-dialog {
     width: 265px;
 }
@@ -249,3 +316,9 @@ h4 {
     margin: 0;
     width: 70px;
 }
+
+/** NEW RACE MODAL **/
+#newRaceModal #raceName {
+    width: 312px;
+}
+
