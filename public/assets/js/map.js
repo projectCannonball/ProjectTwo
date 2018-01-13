@@ -229,7 +229,7 @@ function calculateAndDisplayRoute(directionService, directionDisplay){
       travelMode: $("select[name=type]").val()||'BICYCLING',
     }, function(response, status){
       if(status === 'OK'){
-        console.log(response)
+        //console.log(response)
         directionDisplay.setMap(map);
         directionDisplay.setDirections(response);
 
@@ -237,12 +237,12 @@ function calculateAndDisplayRoute(directionService, directionDisplay){
 
         storedLatLng = [];
         for(i in response.routes[0].overview_path){
-          //path.push(response.routes[0].overview_path[i]);
           storedLatLng.push({
             lat: response.routes[0].overview_path[i].lat(),
             lng: response.routes[0].overview_path[i].lng()
           });
         }
+        //console.log(JSON.stringify(storedLatLng));
       } else {
         window.alert('Direction request failed due to '+status);
       }
@@ -252,7 +252,7 @@ function calculateAndDisplayRoute(directionService, directionDisplay){
 
 // Handles click events on a map, and adds a new point to the Polyline.
 function addLatLng(event) {
-  console.log(event.latLng)
+  //console.log(event.latLng)
   
   if(markers.length >= 2){
     draw = false;
@@ -262,6 +262,7 @@ function addLatLng(event) {
     }
     markers = [];
     latLon = [];
+    storedLatLng = [];
     directionDisplay.setMap(null);
   }
   
@@ -286,7 +287,6 @@ function addLatLng(event) {
     for(let key in markers) {
       markers[key].setMap(null);
     }
-    //markers = [];
   }
 }
 
@@ -354,7 +354,7 @@ function sendRaceInfo(start, end){
     route: JSON.stringify(storedLatLng),
     distance: distance
   };
-  console.log(storedLatLng)
+  //console.log(storedLatLng)
 
   $.ajax({
     url: "/createNewRace/"+$("#currUserID").attr("value"),
