@@ -13,6 +13,7 @@ var currentRace = function() {
         for (i in response.x) {
             var dt = new Date(response.x[i]);
             response.x[i] = (1+dt.getMonth())+"-"+dt.getDate()+"-"+dt.getFullYear();
+            response.y[i] = (response.y[i]/1609.34).toFixed(2);
         };
         
         var ctx = document.getElementById("myChart");
